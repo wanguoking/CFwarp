@@ -27,7 +27,7 @@ rred(){
 if [[ $EUID -ne 0 ]]; then
 yellow " 请以root模式运行脚本。"
 rm -f CFwarp.sh
-exit 0
+exit 1
 fi
 
 if [[ -f /etc/redhat-release ]]; then
@@ -47,7 +47,7 @@ release="Centos"
 else 
 red " 不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
 rm -f CFwarp.sh
-exit 0
+exit 1
 fi
 
 bit=`uname -m`
@@ -362,8 +362,6 @@ sudo reboot
 function BBR(){
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
 red " 不支持当前VPS的架构，请使用KVM等主流架构的VPS "
-sleep 3s
-start_menu
 else 
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
@@ -393,7 +391,7 @@ green "WARP卸载完成"
 }
 
 function c1warp(){
-wg-quick down wgcf
+wg-quick down wgcf >/dev/null 2>&1
 green "临时关闭WARP成功"
 white "============================================================================================="
 white "返回主菜单，请按任意键"
@@ -403,7 +401,7 @@ bash CFwarp.sh
 }
 
 function owarp(){
-wg-quick up wgcf
+wg-quick up wgcf >/dev/null 2>&1
 green "恢复开启WARP成功"
 white "============================================================================================="
 white "返回主菜单，请按任意键"
@@ -451,7 +449,7 @@ green "  2. 为5.6以下系统内核更新至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " =================二、WARP功能选择（更新中）=========================================="
-white " 经检测，你的VPS原生类型：双栈IPV6+IPV4"
+yellow " 经检测，你的VPS原生类型：双栈IPV6+IPV4"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP接管，支持IP分流             "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP接管，支持IP分流      "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP接管，支持IP分流               "    
@@ -482,7 +480,7 @@ case "$menuNumberInput" in
 11 ) c1warp;;
 12 ) owarp;;
 13 ) macka;;
- 0 ) exit 1;;
+ 0 ) exit 0;;
 esac
   
 elif [[ -n ${v66} && -z ${v44} ]]; then
@@ -495,7 +493,7 @@ green "  2. 为5.6以下系统内核更新至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-white " 经检测，你的VPS原生类型：纯IPV6"
+yellow " 经检测，你的VPS原生类型：纯IPV6"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP接管，支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV6由WARP接管，无IPV4，不支持IP分流     "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP接管，支持IP分流               " 
@@ -526,7 +524,7 @@ case "$menuNumberInput" in
 11 ) c1warp;;
 12 ) owarp;;
 13 ) macka;;
- 0 ) exit 1;;
+ 0 ) exit 0;;
 esac
 
 elif [[ -z ${v66} && -n ${v44} ]]; then
@@ -539,7 +537,7 @@ green "  2. 为5.6以下系统内核更新至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-white " 经检测，你的VPS原生类型：纯IPV4"
+yellow " 经检测，你的VPS原生类型：纯IPV4"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV4由WARP接管，无IPV6，不支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP接管，支持IP分流    "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP接管，支持IP分流           "
@@ -570,11 +568,11 @@ case "$menuNumberInput" in
 11 ) c1warp;;
 12 ) owarp;;
 13 ) macka;;
- 0 ) exit 1;;
+ 0 ) exit 0;;
 esac
 else
 red "无法检测，请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
-exit 0
+exit 1
 fi
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 }
