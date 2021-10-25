@@ -258,7 +258,7 @@ systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl restart wg-quick@wgcf
 
-yellow "设置重启VPS时，自动刷新WARP功能"
+yellow "添加重启VPS时，自动修复WARP功能"
 wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/sip.sh >/dev/null 2>&1
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 if [ ${release} = "Centos" ]; then  
