@@ -55,7 +55,7 @@ version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
 minor=`uname -r | awk -F . '{print $2}'`
 op=`lsb_release -d | awk -F ':' '{print $2}'`
-[[ -n ${op} ]] || op=`lsb_release -d | awk -F ':' '{print $2}'`
+[[ -n ${op} ]] || op=`hostnamectl | grep -i Operating | awk -F ':' '{print $2}'`
 vi=`systemd-detect-virt`
 
 if ! type curl >/dev/null 2>&1; then 
