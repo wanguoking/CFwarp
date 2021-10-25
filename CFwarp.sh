@@ -442,51 +442,32 @@ v44=`ip route get 162.159.192.1 2>/dev/null | grep -oP 'src \K\S+'`
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
-    bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-    
-    red " 切记：进入脚本快捷方式 bash CFwarp.sh "
-    
-    white " ==================一、VPS相关调整选择（更新中）==========================================" 
-    
-    green " 1.  永久开启甲骨文VPS的ubuntu系统所有端口 "
-    
-    green " 2.  为5.6以下系统内核更新至5.6以上 "
-    
-    green " 3.  开启原生BBR加速 "
-    
-    green " 4.  检测奈飞Netflix是否解锁 "
-    
-    white " ==================二、WARP功能选择（原VPS类型：双栈IPV6+IPV4）======================================"
-    
-    green " 5. 添加WARP虚拟IPV4，WARP双栈IP，支持IP分流             "
-    
-    green " 6. 添加WARP虚拟IPV6，WARP双栈IP，支持IP分流      "
-    
-    green " 7. 添加WARP虚拟IPV4+IPV6，WARP双栈IP，支持IP分流               "
-    
-    white " ---------------------------------------------------------------------------------"
-    
-    green " 8. 获取WARP+账户无限刷流量 "
-    
-    green " 9. 手动无限刷新WARP的IP(WARP防失联)"
-    
-    green " 10. 卸载WARP功能 "
-    
-    green " 11. 临时关闭WARP功能 "
-    
-    green " 12. 临时关闭后开启WARP功能 "
-    
-    white " ==================三、代理协议脚本选择（更新中）==========================================="
-    
-    green " 13.使用mack-a脚本（支持Xray, V2ray） "
-    
-    white " ============================================================================================="
-    
-    red " 0. 退出脚本 "
-    Print_ALL_Status_menu
-    echo
-    read -p "请输入数字:" menuNumberInput
-    case "$menuNumberInput" in     
+bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
+red " 切记：进入脚本快捷方式 bash CFwarp.sh "    
+white " ==================一、VPS相关调整选择（更新中）=========================================="    
+green "  1. 永久开启甲骨文VPS的ubuntu系统所有端口 "
+green "  2. 为5.6以下系统内核更新至5.6以上 "
+green "  3. 开启原生BBR加速 "
+green "  4. 检测奈飞Netflix是否解锁 "
+white " ==================================================================================="
+white " 经检测，你的VPS原生类型：双栈IPV6+IPV4"
+green "  5. 添加WARP虚拟IPV4，     IP出口流量表现为：IPV6为原生，IPV4由WARP接管，支持IP分流             "
+green "  6. 添加WARP虚拟IPV6，     IP出口流量表现为：IPV4为原生，IPV6由WARP接管，支持IP分流      "
+green "  7. 添加WARP虚拟IPV4+IPV6，IP出口流量表现为：IPV6与IPV4都由WARP接管，支持IP分流               "    
+white " ---------------------------------------------------------------------------------"    
+green "  8. 获取WARP+账户无限刷流量 "
+green "  9. 手动无限刷新WARP的IP(WARP防失联)"    
+green " 10. 卸载WARP功能 "
+green " 11. 临时关闭WARP功能 "
+green " 12. 开启WARP功能 "
+white " ==================三、代理协议脚本选择（更新中）==========================================="
+green " 13.使用mack-a脚本（支持Xray, V2ray） "
+white " ============================================================================================="
+red " 0. 退出脚本 "
+Print_ALL_Status_menu
+echo
+read -p "请输入数字:" menuNumberInput
+case "$menuNumberInput" in     
         1 )
            iptables
 	;;
