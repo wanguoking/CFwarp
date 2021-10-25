@@ -37,7 +37,7 @@ v4=$(wget -T1 -t1 -qO- -4 ip.gs)
 v6=$(wget -T1 -t1 -qO- -6 ip.gs)
 done
 if [[ -n ${v4} ]]; then
-gj4=`curl -s4 https://ip.gs/country-iso`
+gj4=`curl -s4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
@@ -55,7 +55,7 @@ WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
 if [[ -n ${v6} ]]; then 
-gj6=`curl -s6 https://ip.gs/country-iso`
+gj6=`curl -s6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
