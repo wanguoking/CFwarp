@@ -20,12 +20,12 @@ minor=`uname -r | awk -F . '{print $2}'`
 
 if [ "$main" -ge 5 ] && [ "$minor" -ge 6 ]; then 
 red "你的VPS内核版本大于5.6,无须升级！"
-exit 0
+exit 1
 fi
 
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
 red "你的VPS为lxc或openvz架构，无法升级内核！"
-exit 0
+exit 1
 fi
 
 function c8(){
