@@ -140,8 +140,8 @@ blue " 系统内核版本 - $version "
 blue " CPU架构名称  - $bit "
 blue " 虚拟架构类型 -$vi "
 white "------------------------------------------"
-blue " WARP状态+IPv4地址+IP所在区域: ${WARPIPv4Status}"
-blue " WARP状态+IPv6地址+IP所在区域: ${WARPIPv6Status}"
+blue " WARP状态 + IPv4地址 + IP所在区域: ${WARPIPv4Status}"
+blue " WARP状态 + IPv6地址 + IP所在区域: ${WARPIPv6Status}"
 white "------------------------------------------"
 }
 
@@ -319,8 +319,8 @@ WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
 green "安装结束，当前WARP及IP状态如下 "
-blue "WARP状态+IPv4地址+IP所在区域: ${WARPIPv4Status}"
-blue "WARP状态+IPv6地址+IP所在区域: ${WARPIPv6Status}"
+blue "WARP状态 + IPv4地址 + IP所在区域: ${WARPIPv4Status}"
+blue "WARP状态 + IPv6地址 + IP所在区域: ${WARPIPv6Status}"
 white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
