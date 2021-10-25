@@ -54,7 +54,7 @@ bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
 minor=`uname -r | awk -F . '{print $2}'`
-op=`lsb_release -d | awk -F ':' '{print $2}'` >/dev/null 2>&1
+op=`lsb_release -d | awk -F ':' '{print $2}'` 2>/dev/null
 [[ -n ${op} ]] || op=`hostnamectl | grep -i Operating | awk -F ':' '{print $2}'`
 vi=`systemd-detect-virt`
 
@@ -438,7 +438,7 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/ma
 }
 
 function start_menu(){
-systemctl stop wg-quick@wgcf
+systemctl stop wg-quick@wgcf >/dev/null 2>&1
 v44=`ip route get 162.159.192.1 2>/dev/null | grep -oP 'src \K\S+'`
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v44} && -n ${v66} ]]; then 
