@@ -86,7 +86,7 @@ AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智�
 
 v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`curl -s4 https://ip.gs/country-iso`
+gj4=`curl -s4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
@@ -105,7 +105,7 @@ fi
 
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`curl -s6 https://ip.gs/country-iso`
+gj6=`curl -s6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
@@ -282,7 +282,7 @@ green "设置完成"
 
 v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`curl -s4 https://ip.gs/country-iso`
+gj4=`curl -s4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
@@ -301,7 +301,7 @@ fi
 
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`curl -s6 https://ip.gs/country-iso`
+gj6=`curl -s6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
