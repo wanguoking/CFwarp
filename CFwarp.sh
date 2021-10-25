@@ -54,7 +54,7 @@ bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
 minor=`uname -r | awk -F . '{print $2}'`
-op=`lsb_release -d | awk -F ':' '{print $2}'` 2>/dev/null
+op=`lsb_release -d | awk -F ':' '{print $2}' >/dev/null 2>&1`
 [[ -n ${op} ]] || op=`hostnamectl | grep -i Operating | awk -F ':' '{print $2}'`
 vi=`systemd-detect-virt`
 
@@ -576,6 +576,6 @@ else
 red "无法检测，请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
 exit 0
 fi
-systemctl start wg-quick@wgcf
+systemctl start wg-quick@wgcf >/dev/null 2>&1
 }
 start_menu "first" 
