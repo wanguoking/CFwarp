@@ -14,7 +14,8 @@ blue(){
     echo -e "\033[36m\033[01m$1\033[0m"
 }
 
-vi=`systemd-detect-virt`
+vi=`systemd-detect-virt >/dev/null 2>&1 `
+[[ -n ${vi} ]] || vi=`hostnamectl | grep -i Virtualization | awk -F ':' '{print $2}'`
 main=`uname  -r | awk -F . '{print $1 }'`
 minor=`uname -r | awk -F . '{print $2}'`
 
