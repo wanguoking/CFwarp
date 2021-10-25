@@ -56,7 +56,8 @@ main=`uname  -r | awk -F . '{print $1 }'`
 minor=`uname -r | awk -F . '{print $2}'`
 op=`lsb_release -d >/dev/null 2>&1 | awk -F ':' '{print $2}'`
 [[ -n ${op} ]] || op=`hostnamectl | grep -i Operating | awk -F ':' '{print $2}'`
-vi=`systemd-detect-virt`
+vi=`systemd-detect-virt >/dev/null 2>&1`
+[[ -n ${vi} ]] || vi=`hostnamectl | grep -i Virtualization | awk -F ':' '{print $2}'`
 
 if ! type curl >/dev/null 2>&1; then 
 if [ $release = "Centos" ]; then
