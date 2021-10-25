@@ -73,6 +73,6 @@ WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
 green "刷新IP成功，当前WARP及IP状态如下 "
-blue "WARP状态+IPv4地址+IP所在区域: ${WARPIPv4Status}"
-blue "WARP状态+IPv6地址+IP所在区域: ${WARPIPv6Status}"
+blue "WARP状态 + IPv4地址 + IP所在区域: ${WARPIPv4Status}"
+blue "WARP状态 + IPv6地址 + IP所在区域: ${WARPIPv6Status}"
 
