@@ -45,7 +45,7 @@ release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 release="Centos"
 else 
-red " 不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统 "
+red " 不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
 rm -f CFwarp.sh
 exit 0
 fi
@@ -572,7 +572,7 @@ case "$menuNumberInput" in
  0 ) exit 1;;
 esac
 else
-red "无法检测，请向作者反馈"
+red "无法检测，请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
 exit 0
 fi
 systemctl start wg-quick@wgcf
