@@ -398,6 +398,7 @@ green "WARP卸载完成"
 }
 
 function c1warp(){
+systemctl stop wg-quick@wgcf
 wg-quick down wgcf
 green "临时关闭WARP成功"
 white "============================================================================================="
@@ -408,6 +409,7 @@ bash CFwarp.sh
 }
 
 function owarp(){
+systemctl start wg-quick@wgcf
 wg-quick up wgcf
 green "恢复开启WARP成功"
 white "============================================================================================="
