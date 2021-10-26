@@ -49,6 +49,28 @@ red " 不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请
 rm -f CFwarp.sh
 exit 1
 fi
+
+if ! type curl >/dev/null 2>&1; then 
+if [ $release = "Centos" ]; then
+yellow " curl 未安装，安装中 "
+yum -y update && yum install curl -y
+else
+apt update -y && apt install curl -y
+fi	   
+else
+green " curl 已安装，继续 "
+fi
+
+if ! type wget >/dev/null 2>&1; then 
+if [ $release = "Centos" ]; then
+yellow " wget 未安装，安装中 "
+yum -y update && yum install wget -y
+else
+apt update -y && apt install wget -y
+fi	   
+else
+green " wget 已安装，继续 "
+fi 
 sleep 1s
 yellow " 等待2秒……检测vps中……"
 
@@ -66,9 +88,9 @@ vi=`systemd-detect-virt`
 AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
 v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`wget -T1 -t1 -qO- -4 ipinfo.io/country`
+gj4=`curl -4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
 WARPIPv4Status=$(green "WARP+PLUS已开启 + 当前IPV4地址：$v44 + IP所在区域：$g4") 
@@ -85,9 +107,9 @@ fi
 
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`wget -T1 -t1 -qO- -6 ipinfo.io/country`
+gj6=`curl -6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
 WARPIPv6Status=$(green "WARP+PLUS已开启 + 当前IPV6地址：$v66 + IP所在区域：$g6") 
@@ -151,28 +173,6 @@ exit 1
 fi
 fi
 
-if ! type curl >/dev/null 2>&1; then 
-if [ $release = "Centos" ]; then
-yellow " curl 未安装，安装中 "
-yum -y update && yum install curl -y
-else
-apt update -y && apt install curl -y
-fi	   
-else
-green " curl 已安装，继续 "
-fi
-
-if ! type wget >/dev/null 2>&1; then 
-if [ $release = "Centos" ]; then
-yellow " wget 未安装，安装中 "
-yum -y update && yum install wget -y
-else
-apt update -y && apt install wget -y
-fi	   
-else
-green " wget 已安装，继续 "
-fi 
-
 if [[ ${vi} == "lxc" ]]; then
 if [ $release = "Centos" ]; then
 echo -e nameserver 2001:67c:2960:6464:6464:6464:6464:6464 > /etc/resolv.conf
@@ -185,7 +185,7 @@ yum -y install curl net-tools wireguard-tools
 if [ "$main" -lt 5 ]|| [ "$minor" -lt 6 ]; then 
 if [[ ${vi} == "kvm" || ${vi} == "xen" || ${vi} == "microsoft" ]]; then
 green "经检测，内核小于5.6版本，安装WARP内核模块模式"
-yellow "可选择内核升级到5.6版本以上，即可安装最高效的WARP内核集成模式"
+yellow "内核升级到5.6版本以上，即可安装最高效的WARP内核集成模式"
 sleep 2s
 curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
 yum -y install epel-release wireguard-dkms
@@ -202,7 +202,7 @@ apt -y --no-install-recommends install net-tools iproute2 openresolv dnsutils wi
 if [ "$main" -lt 5 ]|| [ "$minor" -lt 6 ]; then 
 if [[ ${vi} == "kvm" || ${vi} == "xen" || ${vi} == "microsoft" ]]; then
 green "经检测，内核小于5.6版本，安装WARP内核模块模式"
-yellow "可选择内核升级到5.6版本以上，即可安装最高效的WARP内核集成模式"
+yellow "内核升级到5.6版本以上，即可安装最高效的WARP内核集成模式"
 sleep 2s
 apt -y --no-install-recommends install linux-headers-$(uname -r);apt -y --no-install-recommends install wireguard-dkms
 fi
@@ -288,9 +288,9 @@ green "设置完成"
 
 v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`wget -T1 -t1 -qO- -4 ipinfo.io/country`
+gj4=`curl -4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
 WARPIPv4Status=$(green "WARP+PLUS已开启 + 当前IPV4地址：$v44 + IP所在区域：$g4 ") 
@@ -307,9 +307,9 @@ fi
 
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`wget -T1 -t1 -qO- -6 ipinfo.io/country`
+gj6=`curl -6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
 WARPIPv6Status=$(green "WARP+PLUS已开启 + 当前IPV6地址：$v66 + IP所在区域：$g6 ") 
