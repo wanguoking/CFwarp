@@ -2,6 +2,8 @@
 
 ### 还有几个功能的加减，正式版将配合教程视频一起发布。。快了。。
 
+### 2021.10.26更新：调整区域识别API，WARP选项可随意切换。
+
 ### 2021.10.24重大更新：自动识别VPS类型（纯V4，纯V6，双栈V4V6）并给出相应的WARP配置方案，防止之前全盘显示后误选失联问题，优化每个选项退出机制。
 
 ### 2021.10.23更新：加入对openvz与lxc vps是否启用TUN的判断机制。。
@@ -70,13 +72,6 @@ EUserv德鸡DIG9用户请先执行
 echo -e "search blue.kundencontroller.de\noptions rotate\nnameserver 2a02:180:6:5::1c\nnameserver 2a02:180:6:5::4\nnameserver 2a02:180:6:5::1e\nnameserver 2a02:180:6:5::1d" > /etc/resolv.conf
 ```
 ---------------------------------------------------------------------------------------------
-
- 
-### 提醒：
-
-不建议使用Docker，因为目前与WARP模式不兼容。
-
---------------------------------------------------------------------------------------------
 
 # 目录
 
@@ -170,72 +165,44 @@ wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.s
 
 检测原生BBR是否生效，最后显示有tcp_bbr字样，说明成功。
 
-- **四、奈非Netflix检测(sjlleo版)：**
+- **四、奈非Netflix检测()：**
 
 支持IPV4/IPV6检测，结果非常详细。
-
-![4f396307256bfefd7c92d6f667fea45](https://user-images.githubusercontent.com/80431714/121798699-62b3b700-cc5a-11eb-81f0-49a0d2fcdaf7.png)
-
 
 - **五、安装WARP脚本**
 
 - **（仅支持 纯IPV4 VPS）**
 
-脚本5、结果表现为2个IP：VPS本地IPV4+WARP虚拟IPV6
+结果表现为2个IP：VPS本地IPV4+WARP虚拟IPV6
 
-脚本6、结果表现为3个IP：VPS本地IPV4+WARP虚拟IPV4+WARP虚拟IPV6
+结果表现为3个IP：VPS本地IPV4+WARP虚拟IPV4+WARP虚拟IPV6
 
-脚本7、结果表现为2个IP：VPS本地IPV4+WARP虚拟IPV4
+结果表现为2个IP：VPS本地IPV4+WARP虚拟IPV4
 
 - **（仅支持双栈IPV4+IPV6 VPS）**
 
-脚本8、结果表现为3个IP：VPS本地IPV4+VPS本地IPV6+WARP虚拟IPV6
+结果表现为3个IP：VPS本地IPV4+VPS本地IPV6+WARP虚拟IPV6
 
-脚本9、结果表现为4个IP：VPS本地IPV4+VPS本地IPV6+WARP虚拟IPV6+WARP虚拟IPV4
+结果表现为4个IP：VPS本地IPV4+VPS本地IPV6+WARP虚拟IPV6+WARP虚拟IPV4
 
-脚本10、结果表现为3个IP：VPS本地IPV4+VPS本地IPV6+WARP虚拟IPV4
+结果表现为3个IP：VPS本地IPV4+VPS本地IPV6+WARP虚拟IPV4
 
 - **（仅支持 纯IPV6 VPS）**
 
-脚本11、结果表现为2个IP：VPS本地IPV6+WARP虚拟IPV6 （注意、无IPV4）
+结果表现为2个IP：VPS本地IPV6+WARP虚拟IPV6 （注意、无IPV4）
 
-脚本12、结果表现为3个IP：VPS本地IPV6+WARP虚拟IPV6+WARP虚拟IPV4
+结果表现为3个IP：VPS本地IPV6+WARP虚拟IPV6+WARP虚拟IPV4
 
-脚本13、结果表现为2个IP：VPS本地IPV6+WARP虚拟IPV4
-
-- **六、定时重启VPS功能，：**
-
-VPS可能会强制初始化DNS设置，使WARP设置的DNS失效，导致进入SSH后无法访问外网（如无此问题则无需选择执行）
-
-重启VPS能恢复WARP的DNS并能正常访问外网，现设置为每天早上3点自动重启VPS一次，保证WARP功能正常
-
-- **七、永久关闭WARP功能：**
-
-作用1：永久关闭WARP分配的虚拟IP，还原当前VPS的本地IP。
-
-作用2：如之前已安装了一种WARP方案，现更换另一种WARP方案，请先关闭WARP功能，再执行安装WARP脚本。
-
-- **八、启动并开机自启WARP功能：**
-
-作用：永久关闭WARP功能后的再次启用。
-
-因WARP脚本默认集成该功能，所以脚本安装成功后不必再执行该项。
+结果表现为2个IP：VPS本地IPV6+WARP虚拟IPV4
 
 - **九、代理协议脚本选择**
 
 支持IPV4/IPV6/X86/ARM的全面脚本 ，推荐！
 mack-a脚本地址：https://github.com/mack-a/v2ray-agent
 
-支持IPV4/IPV6/X86的脚本
-phlinhng脚本地址：https://github.com/phlinhng/v2ray-tcp-tls-web
-
 如有好的脚本会继续添加，欢迎大家推荐哦！！
 
 注意：域名解析所填写的IP必须是VPS本地IP，与WARP分配的IP没关系！
-
-- **十、重启VPS实例（俗话说：重启解决99%的问题）**
- 
-甲骨文云也可以登录网页，进入实例后台，执行“重新引导”，在后台重启。
 
 ------------------------------------------------------------------------------------------------------
 ### 自定义ip分流配置模板说明
