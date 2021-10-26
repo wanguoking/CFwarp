@@ -440,7 +440,7 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/ma
 
 function start_menu(){
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
-v44=`ip route get 162.159.192.1 | grep -oP 'src \K\S+'`
+v44=`wget -T1 -t1 -qO- -4 ip.gs`
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 if [[ -n ${v44} && -n ${v66} ]]; then 
