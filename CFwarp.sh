@@ -442,6 +442,7 @@ function start_menu(){
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
 v44=`ip route get 162.159.192.1 | grep -oP 'src \K\S+'`
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
+systemctl start wg-quick@wgcf >/dev/null 2>&1
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
 bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
@@ -577,6 +578,5 @@ else
 red "无法检测，请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
 exit 1
 fi
-systemctl start wg-quick@wgcf >/dev/null 2>&1
 }
 start_menu "first" 
