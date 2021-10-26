@@ -398,7 +398,7 @@ green "WARP卸载完成"
 }
 
 function c1warp(){
-wg-quick down wgcf >/dev/null 2>&1
+wg-quick down wgcf
 green "临时关闭WARP成功"
 white "============================================================================================="
 white "返回主菜单，请按任意键"
@@ -408,7 +408,7 @@ bash CFwarp.sh
 }
 
 function owarp(){
-wg-quick up wgcf >/dev/null 2>&1
+wg-quick up wgcf
 green "恢复开启WARP成功"
 white "============================================================================================="
 white "返回主菜单，请按任意键"
