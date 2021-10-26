@@ -36,6 +36,8 @@ wg-quick up wgcf >/dev/null 2>&1
 v4=$(wget -T1 -t1 -qO- -4 ip.gs)
 v6=$(wget -T1 -t1 -qO- -6 ip.gs)
 done
+
+v44=`wget -T10 -qO- -4 ipinfo.io/ip`
 if [[ -n ${v44} ]]; then
 gj4=`wget -T10 -qO- -4 ipinfo.io/country`
 g4=$(eval echo \$$gj4)
@@ -54,7 +56,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`wget -T10 -qO- -6 ipinfo.io/ ip`
+v66=`wget -T10 -qO- -6 ipinfo.io/ip`
 if [[ -n ${v66} ]]; then 
 gj6=`wget -T10 -qO- -6 ipinfo.io/country`
 g6=$(eval echo \$$gj6)
