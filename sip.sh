@@ -36,37 +36,38 @@ wg-quick up wgcf >/dev/null 2>&1
 v4=$(wget -T1 -t1 -qO- -4 ip.gs)
 v6=$(wget -T1 -t1 -qO- -6 ip.gs)
 done
-if [[ -n ${v4} ]]; then
-gj4=`curl -4 https://ip.gs/country-iso -k`
+if [[ -n ${v44} ]]; then
+gj4=`wget -T10 -qO- -4 ipinfo.io/country`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(wget -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "WARP+PLUS已开启，当前IPV4地址：$v4 ，IP所在区域：$g4 ") 
+WARPIPv4Status=$(green "WARP+PLUS已开启 + 当前IPV4地址：$v44 + IP所在区域：$g4 ") 
 ;;  
 on) 
-WARPIPv4Status=$(green "WARP已开启，当前IPV4地址：$v4 ，IP所在区域：$g4 ") 
+WARPIPv4Status=$(green "WARP已开启 + 当前IPV4地址：$v44 + IP所在区域：$g4 ") 
 ;; 
 off) 
-WARPIPv4Status=$(yellow "WARP未开启，当前IPV4地址：$v4 ，IP所在区域：$g4")
+WARPIPv4Status=$(yellow "WARP未开启 + 当前IPV4地址：$v44 + IP所在区域：$g4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-if [[ -n ${v6} ]]; then 
-gj6=`curl -6 https://ip.gs/country-iso -k`
+v66=`wget -T10 -qO- -6 ipinfo.io/ ip`
+if [[ -n ${v66} ]]; then 
+gj6=`wget -T10 -qO- -6 ipinfo.io/country`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(wget -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "WARP+PLUS已开启，当前IPV6地址：$v6 ，IP所在区域：$g6 ") 
+WARPIPv6Status=$(green "WARP+PLUS已开启 + 当前IPV6地址：$v66 + IP所在区域：$g6 ") 
 ;;  
 on) 
-WARPIPv6Status=$(green "WARP已开启，当前IPV6地址：$v6 ，IP所在区域：$g6 ") 
+WARPIPv6Status=$(green "WARP已开启 + 当前IPV6地址：$v66 + IP所在区域：$g6 ") 
 ;; 
 off) 
-WARPIPv6Status=$(yellow "WARP未开启，当前IPV6地址：$v6 ，IP所在区域：$g6 ") 
+WARPIPv6Status=$(yellow "WARP未开启 + 当前IPV6地址：$v66 + IP所在区域：$g6 ") 
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
@@ -75,4 +76,3 @@ fi
 green "刷新IP成功，当前WARP及IP状态如下 "
 blue "WARP状态 + IPv4地址 + IP所在区域: ${WARPIPv4Status}"
 blue "WARP状态 + IPv6地址 + IP所在区域: ${WARPIPv6Status}"
-
