@@ -22,6 +22,7 @@ rred(){
     echo -e "\033[1;35m\033[01m$1\033[0m"
 }
 
+if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
 red "稍等2秒……刷新中…………"
 AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
 wg-quick down wgcf >/dev/null 2>&1
@@ -39,7 +40,7 @@ done
 
 v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`curl -4 https://ip.gs/country-iso -k`
+gj4=`curl -s4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
@@ -58,7 +59,7 @@ fi
 
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`curl -6 https://ip.gs/country-iso -k`
+gj6=`curl -s6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
@@ -74,7 +75,10 @@ esac
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
-
 green "刷新IP结束，当前WARP及IP状态如下 "
 blue "WARP状态 + IPv4地址 + IP所在区域: ${WARPIPv4Status}"
 blue "WARP状态 + IPv6地址 + IP所在区域: ${WARPIPv6Status}"
+fi
+else
+red "你的WARP没有开启，无法运行"
+fi
