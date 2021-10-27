@@ -72,7 +72,7 @@ else
 green " wget 已安装，继续 "
 fi 
 sleep 1s
-yellow " 等待2秒……检测vps中……"
+yellow " 等待3秒……检测vps中……"
 
 bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
@@ -162,13 +162,13 @@ wg-quick down wgcf >/dev/null 2>&1
 rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf
 
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
-green "正在检测lxc/openvz架构的vps是否开启TUN………！"
+yellow "正在检测lxc/openvz架构的vps是否开启TUN………！"
 sleep 2s
 TUN=$(cat /dev/net/tun 2>&1)
 if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
 green "检测完毕：已开启TUN，支持安装wireguard-go模式的WARP(+)，继续……"
 else
-yellow "检测完毕：未开启TUN，不支持安装WARP(+)，请与VPS厂商沟通或后台设置以开启TUN，脚本退出！"
+red "检测完毕：未开启TUN，不支持安装WARP(+)，请与VPS厂商沟通或后台设置以开启TUN，脚本退出！"
 exit 1
 fi
 fi
@@ -181,7 +181,7 @@ fi
 
 if [ $release = "Centos" ]; then  
 yum -y install epel-release
-yum -y install curl net-tools wireguard-tools	
+yum -y install net-tools wireguard-tools	
 if [ "$main" -lt 5 ]|| [ "$minor" -lt 6 ]; then 
 if [[ ${vi} == "kvm" || ${vi} == "xen" || ${vi} == "microsoft" ]]; then
 green "经检测，内核小于5.6版本，安装WARP内核模块模式"
