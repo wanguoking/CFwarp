@@ -398,8 +398,12 @@ green "WARP卸载完成"
 }
 
 function c1warp(){
+if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
 wg-quick down wgcf
 green "临时关闭WARP成功"
+else
+systemctl restart wg-quick@wgcf
+fi
 white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
