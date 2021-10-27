@@ -331,7 +331,7 @@ white "=========================================================================
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
-bash CFwarp.sh
+start_menu
 }
 
 function warpip(){
@@ -340,7 +340,7 @@ white "=========================================================================
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
-bash CFwarp.sh
+start_menu
 }
 
 function warpplus(){
@@ -380,7 +380,7 @@ white "=========================================================================
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
-bash CFwarp.sh
+start_menu
 }
 
 function cwarp(){
