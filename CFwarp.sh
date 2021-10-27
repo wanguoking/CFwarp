@@ -331,7 +331,7 @@ white "=========================================================================
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
-start_menu
+bash CFwarp.sh
 }
 
 function warpip(){
@@ -340,7 +340,7 @@ white "=========================================================================
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
-start_menu
+bash CFwarp.sh
 }
 
 function warpplus(){
@@ -380,7 +380,7 @@ white "=========================================================================
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
-start_menu
+bash CFwarp.sh
 }
 
 function cwarp(){
@@ -391,24 +391,24 @@ yum -y autoremove wireguard-tools wireguard-dkms
 else 
 apt -y autoremove wireguard-tools wireguard-dkms
 fi
-sed -i '/sp.sh/d' /var/spool/cron/root >/dev/null 2>&1
-sed -i '/sp.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
+sed -i '/sip.sh/d' /var/spool/cron/root >/dev/null 2>&1
+sed -i '/sip.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
 rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf sip.sh ucore.sh nf.sh CFwarp.sh
 green "WARP卸载完成"
 }
 
 function c1warp(){
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
+yellow "WARP已在运行中，确认临时关闭～请按任意键"
+char=$(get_char)
 wg-quick down wgcf
 green "临时关闭WARP成功"
 else
-systemctl restart wg-quick@wgcf
-fi
-white "============================================================================================="
-white "返回主菜单，请按任意键"
-white "退出脚本，请按Ctrl+C"
+yellow "WARP临时关闭中，确认恢复开启～请按任意键"
 char=$(get_char)
-bash CFwarp.sh
+systemctl restart wg-quick@wgcf
+green "恢复开启WARP成功"
+fi
 }
 
 function owarp(){
