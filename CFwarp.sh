@@ -271,15 +271,15 @@ if [ ${release} = "Centos" ]; then
 yum install vixie-cron crontabs >/dev/null 2>&1
 chkconfig crond on >/dev/null 2>&1
 systemctl start crond.service >/dev/null 2>&1
-sed -i '/sp.sh/d' /var/spool/cron/root >/dev/null 2>&1
-echo "@reboot /root/sp.sh >/dev/null 2>&1" >> /var/spool/cron/root
+sed -i '/sip.sh/d' /var/spool/cron/root >/dev/null 2>&1
+echo "@reboot /root/sip.sh >/dev/null 2>&1" >> /var/spool/cron/root
 chmod 777 /var/spool/cron/root
 crontab /var/spool/cron/root
 systemctl restart crond.service
 else
 apt install cron >/dev/null 2>&1
-sed -i '/sp.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-echo "@reboot /root/sp.sh >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
+sed -i '/sip.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
+echo "@reboot /root/sip.sh >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 chmod 777 /var/spool/cron/crontabs/root
 crontab /var/spool/cron/crontabs/root
 systemctl restart cron.service
