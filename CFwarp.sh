@@ -376,8 +376,9 @@ if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
 red " 不支持当前VPS的架构，请使用KVM等主流架构的VPS "
 elif [[ -z ${bbr} ]]; then
 yellow "检测完毕：未开启BBR加速，安装BBR加速中……" 
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sleep 2s
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf >/dev/null 2>&1
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf >/dev/null 2>&1
 sysctl -p
 lsmod | grep bbr
 green "已开启BBR加速"
@@ -405,28 +406,18 @@ rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.
 green "WARP卸载完成"
 }
 
-function c1warp(){
+function ocwarp(){
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
 yellow "WARP已在运行中，确认临时关闭～请按任意键"
 char=$(get_char)
 wg-quick down wgcf
 green "临时关闭WARP成功"
 else
-yellow "WARP临时关闭中，确认恢复开启～请按任意键"
+yellow "WARP目前已临时关闭，确认恢复开启～请按任意键"
 char=$(get_char)
-systemctl restart wg-quick@wgcf
+systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP成功"
 fi
-}
-
-function owarp(){
-systemctl restart wg-quick@wgcf
-green "恢复开启WARP成功"
-white "============================================================================================="
-white "返回主菜单，请按任意键"
-white "退出脚本，请按Ctrl+C"
-char=$(get_char)
-bash CFwarp.sh
 }
 
 function macka(){
@@ -478,10 +469,9 @@ white " ------------------------------------------------------------------------
 green "  8. 获取WARP+账户无限刷流量 "
 green "  9. 手动无限刷新WARP的IP(WARP防失联)"    
 green " 10. 卸载WARP功能 "
-green " 11. 临时关闭WARP功能 "
-green " 12. 开启WARP功能 "
+green " 11. 临时开关WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
-green " 13.使用mack-a脚本（支持Xray, V2ray） "
+green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
 red " 0. 退出脚本 "
 Print_ALL_Status_menu
@@ -498,9 +488,8 @@ case "$menuNumberInput" in
  8 ) warpplus;;
  9 ) warpip;;	
 10 ) cwarp;;
-11 ) c1warp;;
-12 ) owarp;;
-13 ) macka;;
+11 ) ocwarp;;
+12 ) macka;;
  0 ) exit 0;;
 esac
   
@@ -522,10 +511,9 @@ white " ------------------------------------------------------------------------
 green "  8. 获取WARP+账户无限刷流量 "
 green "  9. 手动无限刷新WARP的IP(WARP防失联)"
 green " 10. 卸载WARP功能 "
-green " 11. 临时关闭WARP功能 "
-green " 12. 临时关闭后开启WARP功能 "
+green " 11. 临时开关WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
-green " 13.使用mack-a脚本（支持Xray, V2ray） "
+green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
 red " 0. 退出脚本 "
 Print_ALL_Status_menu
@@ -542,9 +530,8 @@ case "$menuNumberInput" in
  8 ) warpplus;;
  9 ) warpip;;	
 10 ) cwarp;;
-11 ) c1warp;;
-12 ) owarp;;
-13 ) macka;;
+11 ) ocwarp;;
+12 ) macka;;
  0 ) exit 0;;
 esac
 
@@ -566,10 +553,9 @@ white " ------------------------------------------------------------------------
 green "  8. 获取WARP+账户无限刷流量 "
 green "  9. 手动无限刷新WARP的IP(WARP防失联)"
 green " 10. 卸载WARP功能 "
-green " 11. 临时关闭WARP功能 "
-green " 12. 临时关闭后开启WARP功能 "
+green " 11. 临时开关WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
-green " 13.使用mack-a脚本（支持Xray, V2ray） "
+green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
 red " 0. 退出脚本 "
 Print_ALL_Status_menu
@@ -586,9 +572,8 @@ case "$menuNumberInput" in
  8 ) warpplus;;
  9 ) warpip;;	
 10 ) cwarp;;
-11 ) c1warp;;
-12 ) owarp;;
-13 ) macka;;
+11 ) ocwarp;;
+12 ) macka;;
  0 ) exit 0;;
 esac
 else
