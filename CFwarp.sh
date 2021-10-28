@@ -322,7 +322,7 @@ off)
 WARPIPv6Status=$(yellow "IPV6 WARP状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
 esac 
 else
-WARPIPv6Status=$(red "不存在IPV4地址 ")
+WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
 green "安装结束，当前WARP及IP状态如下 "
