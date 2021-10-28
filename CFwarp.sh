@@ -367,15 +367,16 @@ sudo reboot
 }
 
 function BBR(){
+bbr=$(lsmod | grep bbr)
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
 red " 不支持当前VPS的架构，请使用KVM等主流架构的VPS "
 elif [[ -z ${bbr} ]]; then
-bbr=$(lsmod | grep bbr)
 yellow "检测完毕：未开启BBR加速，安装BBR加速中……" 
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
-green "BBR加速已开启"
+lsmod | grep bbr
+green "已开启BBR加速"
 else
 green "检测完毕：已开启BBR加速"
 fi
