@@ -363,12 +363,10 @@ wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/ucore.sh
 }
 
 function iptables(){
-sudo iptables -P INPUT ACCEPT
-sudo iptables -P FORWARD ACCEPT
-sudo iptables -P OUTPUT ACCEPT
-sudo iptables -F
-sudo apt-get purge netfilter-persistent -y
-sudo reboot
+rm -f /etc/iptables/rules.v4
+rm -f /etc/iptables/rules.v6
+iptables -P INPUT ACCEPT
+iptables -F
 }
 
 function BBR(){
