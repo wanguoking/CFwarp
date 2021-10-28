@@ -90,7 +90,7 @@ v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
 WARPIPv4Status=$(green "IPV4 WARP状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
@@ -109,7 +109,7 @@ v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
 WARPIPv6Status=$(green "IPV6 WARP状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
@@ -292,7 +292,7 @@ v44=`wget -T1 -t1 -qO- -4 ip.gs`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4 https://ip.gs/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
 WARPIPv4Status=$(green "IPV4 WARP状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
@@ -311,7 +311,7 @@ v66=`wget -T1 -t1 -qO- -6 ip.gs`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6 https://ip.gs/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
 WARPIPv6Status=$(green "IPV6 WARP状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
@@ -408,8 +408,8 @@ green "WARP卸载完成"
 }
 
 function ocwarp(){
-WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
 yellow "WARP已在运行中，确认临时关闭～请按任意键"
 char=$(get_char)
