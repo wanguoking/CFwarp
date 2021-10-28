@@ -61,19 +61,8 @@ else
 green " curl 已安装，继续 "
 fi
 
-if ! type wget >/dev/null 2>&1; then 
-if [ $release = "Centos" ]; then
-yellow " wget 未安装，安装中 "
-yum -y update && yum install wget -y
-else
-apt update -y && apt install wget -y
-fi	   
-else
-green " wget 已安装，继续 "
-fi 
 sleep 1s
 yellow " 等待3秒……检测vps中……"
-
 bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
