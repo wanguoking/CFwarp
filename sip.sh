@@ -78,7 +78,6 @@ fi
 green "刷新IP结束，当前WARP及IP状态如下 "
 blue "WARP状态 + IPv4地址 + IP所在区域: ${WARPIPv4Status}"
 blue "WARP状态 + IPv6地址 + IP所在区域: ${WARPIPv6Status}"
-fi
 else
 red "你的WARP没有开启，无法运行"
 fi
