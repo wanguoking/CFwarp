@@ -418,6 +418,11 @@ char=$(get_char)
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP成功"
 fi
+white "============================================================================================="
+white "返回主菜单，请按任意键"
+white "退出脚本，请按Ctrl+C"
+char=$(get_char)
+bash CFwarp.sh
 }
 
 function macka(){
