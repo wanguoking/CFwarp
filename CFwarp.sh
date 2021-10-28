@@ -408,6 +408,8 @@ green "WARP卸载完成"
 }
 
 function ocwarp(){
+WARPIPv4Status=$(curl -s4 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6 https://www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
 yellow "WARP已在运行中，确认临时关闭～请按任意键"
 char=$(get_char)
