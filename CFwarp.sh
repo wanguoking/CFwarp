@@ -139,7 +139,7 @@ stty $SAVEDSTTY
 }
 
 function ins(){
-wg-quick down wgcf >/dev/null 2>&1
+systemctl stop wg-quick@wgcf >/dev/null 2>&1
 rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf
 
 if ! type curl >/dev/null 2>&1; then 
