@@ -278,42 +278,13 @@ fi
 green "设置完成"
 
 v44=`wget -T1 -t1 -qO- -4 ipget.net`
-if [[ -n ${v44} ]]; then
 gj4=`wget -T1 -t1 -qO- -4 ipget.net/country-iso`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-case ${WARPIPv4Status} in 
-plus) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
-;;  
-on) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
-;; 
-off) 
-WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
-esac 
-else
-WARPIPv4Status=$(red "不存在IPV4地址 ")
-fi 
-
 v66=`wget -T1 -t1 -qO- -6 ipget.net`
-if [[ -n ${v66} ]]; then 
 gj6=`wget -T1 -t1 -qO- -6 ipget.net/country-iso`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-case ${WARPIPv6Status} in 
-plus) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
-;;  
-on) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
-;; 
-off) 
-WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
-esac 
-else
-WARPIPv6Status=$(red "不存在IPV6地址 ")
-fi 
 
 green " 安装结束！ "
 white "=========================================="
