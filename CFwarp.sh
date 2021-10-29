@@ -440,12 +440,12 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/ma
 function start_menu(){
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
-v44=`wget -T1 -t1 -qO- -4 ip.gs`
-v66=`wget -T1 -t1 -qO- -6 ip.gs`
+v44=`wget -T1 -t1 -qO- -4 ipget.net`
+v66=`wget -T1 -t1 -qO- -6 ipget.net`
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 else
-v44=`wget -T1 -t1 -qO- -4 ip.gs`
-v66=`wget -T1 -t1 -qO- -6 ip.gs`
+v44=`wget -T1 -t1 -qO- -4 ipget.net`
+v66=`wget -T1 -t1 -qO- -6 ipget.net`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
