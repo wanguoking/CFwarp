@@ -71,13 +71,13 @@ g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "IPV4 WARP状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
 ;;  
 on) 
-WARPIPv4Status=$(green "IPV4 WARP状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
 ;; 
 off) 
-WARPIPv4Status=$(yellow "IPV4 WARP状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
+WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
@@ -90,13 +90,13 @@ g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "IPV6 WARP状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
 ;;  
 on) 
-WARPIPv6Status=$(green "IPV6 WARP状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
 ;; 
 off) 
-WARPIPv6Status=$(yellow "IPV6 WARP状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
+WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
@@ -120,10 +120,10 @@ blue " 系统内核版本 - $version "
 blue " CPU架构名称  - $bit "
 blue " 虚拟架构类型 - $vi "
 white "=========================================="
-white " IPV4：当前WARP及IP相关信息如下"
+white " IPV4：当前WARP(+)及IP相关信息如下"
 blue " ${WARPIPv4Status}"
 white "------------------------------------------"
-white " IPV6：当前WARP及IP相关信息如下"
+white " IPV6：当前WARP(+)及IP相关信息如下"
 blue " ${WARPIPv6Status}"
 white "=========================================="
 }
@@ -258,7 +258,6 @@ systemctl start wg-quick@wgcf
 
 yellow "添加重启VPS时，自动修复WARP功能"
 wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/sip.sh >/dev/null 2>&1
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 if [ ${release} = "Centos" ]; then  
 yum install vixie-cron crontabs >/dev/null 2>&1
 chkconfig crond on >/dev/null 2>&1
@@ -285,13 +284,13 @@ g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "IPV4 WARP状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
 ;;  
 on) 
-WARPIPv4Status=$(green "IPV4 WARP状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
 ;; 
 off) 
-WARPIPv4Status=$(yellow "IPV4 WARP状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
+WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
@@ -304,24 +303,24 @@ g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "IPV6 WARP状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
 ;;  
 on) 
-WARPIPv6Status=$(green "IPV6 WARP状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
 ;; 
 off) 
-WARPIPv6Status=$(yellow "IPV6 WARP状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
+WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
-green " 安装结束，当前WARP及IP状态如下 "
+green " 安装结束！ "
 white "=========================================="
-white " IPV4：当前WARP及IP相关信息如下"
+white " IPV4：当前WARP(+)及IP相关信息如下"
 blue " ${WARPIPv4Status}"
 white "------------------------------------------"
-white " IPV6：当前WARP及IP相关信息如下"
+white " IPV6：当前WARP(+)及IP相关信息如下"
 blue " ${WARPIPv6Status}"
 white "=========================================="
 white "============================================================================================="
@@ -395,23 +394,30 @@ fi
 sed -i '/sip.sh/d' /var/spool/cron/root >/dev/null 2>&1
 sed -i '/sip.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
 rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf sip.sh ucore.sh nf.sh CFwarp.sh
-green "WARP卸载完成"
+green "WARP(+)卸载完成"
 }
 
 function ocwarp(){
 WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
-yellow "WARP已在运行中，确认临时关闭～请按任意键"
-char=$(get_char)
+green "当前WARP(+)已开启，执行临时关闭……"
+sleep 1s
 wg-quick down wgcf
-green "临时关闭WARP成功"
+green "临时关闭WARP(+)成功"
 else
-yellow "WARP目前已临时关闭，确认恢复开启～请按任意键"
-char=$(get_char)
+yellow "当前WARP(+)已临时关闭，执行恢复开启……"
+sleep 1s
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
-green "恢复开启WARP成功"
+green "恢复开启WARP(+)成功"
 fi
+white "=========================================="
+white " IPV4：当前WARP(+)及IP相关信息如下"
+blue " ${WARPIPv4Status}"
+white "------------------------------------------"
+white " IPV6：当前WARP(+)及IP相关信息如下"
+blue " ${WARPIPv6Status}"
+white "=========================================="
 white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
