@@ -440,9 +440,9 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/ma
 }
 
 function start_menu(){
-WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
+WARPIPv4=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
 v44=`wget -T1 -t1 -qO- -4 ip.gs`
 v66=`wget -T1 -t1 -qO- -6 ip.gs`
