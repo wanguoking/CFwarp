@@ -356,6 +356,7 @@ rm -f /etc/iptables/rules.v4
 rm -f /etc/iptables/rules.v6
 iptables -P INPUT ACCEPT
 iptables -F
+green "甲骨文VPS的系统所有端口规则已打开"
 }
 
 function BBR(){
