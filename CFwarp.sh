@@ -372,7 +372,7 @@ function ocwarp(){
 WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6Status = plus || $WARPIPv4Status = plus || $WARPIPv6Status = on || $WARPIPv4Status = on ]]; then
-green "当前WARP(+)已开启，执行临时关闭……"
+yellow "当前WARP(+)已开启，执行临时关闭……"
 sleep 1s
 wg-quick down wgcf
 green "临时关闭WARP(+)成功"
@@ -382,13 +382,6 @@ sleep 1s
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP(+)成功"
 fi
-white "=========================================="
-white " IPV4：当前WARP(+)及IP相关信息如下"
-blue " ${WARPIPv4Status}"
-white "------------------------------------------"
-white " IPV6：当前WARP(+)及IP相关信息如下"
-blue " ${WARPIPv6Status}"
-white "=========================================="
 white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
