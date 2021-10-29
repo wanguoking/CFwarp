@@ -354,10 +354,7 @@ wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/ucore.sh
 }
 
 function iptables(){
-ulimit -c unlimited
 rm -rf /etc/iptables/rules.v4 && rm -rf /etc/iptables/rules.v6
-iptables -P INPUT ACCEPT
-iptables -F
 green "甲骨文VPS的系统所有端口规则已打开"
 }
 
