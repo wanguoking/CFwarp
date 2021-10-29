@@ -160,14 +160,14 @@ TUN=$(cat /dev/net/tun 2>&1)
 if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
 green "检测完毕：已开启TUN，支持安装wireguard-go模式的WARP(+)，继续……"
 else
-red "检测完毕：未开启TUN，不支持安装WARP(+)，请与VPS厂商沟通或后台设置以开启TUN，脚本退出！"
+red "检测完毕：未开启TUN，不支持安装WARP(+)，请与VPS厂商沟通或后台设置以开启TUN，反馈地址 https://github.com/kkkyg/CFwarp/issues"
 exit 1
 fi
 fi
 
 if [[ ${vi} == "lxc" ]]; then
 if [ $release = "Centos" ]; then
-echo -e nameserver 2001:67c:2960:6464:6464:6464:6464:6464 > /etc/resolv.conf
+echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 fi
 fi
 
@@ -316,7 +316,7 @@ else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
-green "安装结束，当前WARP及IP状态如下 "
+green " 安装结束，当前WARP及IP状态如下 "
 white "=========================================="
 white " IPV4：当前WARP及IP相关信息如下"
 blue " ${WARPIPv4Status}"
