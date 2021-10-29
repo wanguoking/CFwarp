@@ -354,6 +354,7 @@ wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/ucore.sh
 }
 
 function iptables(){
+ulimit -c unlimited
 rm -rf /etc/iptables/rules.v4 && rm -rf /etc/iptables/rules.v6
 iptables -P INPUT ACCEPT
 iptables -F
