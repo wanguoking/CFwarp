@@ -50,17 +50,6 @@ rm -f CFwarp.sh
 exit 1
 fi
 
-if ! type curl >/dev/null 2>&1; then 
-if [ $release = "Centos" ]; then
-yellow " curl 未安装，安装中 "
-yum -y update && yum install curl -y
-else
-apt update -y && apt install curl -y
-fi	   
-else
-green " curl 已安装，继续 "
-fi
-
 sleep 1s
 yellow " 等待3秒……检测vps中……"
 bit=`uname -m`
@@ -151,6 +140,17 @@ stty $SAVEDSTTY
 function ins(){
 wg-quick down wgcf >/dev/null 2>&1
 rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf
+
+if ! type curl >/dev/null 2>&1; then 
+if [ $release = "Centos" ]; then
+yellow " 检测到curl未安装，安装中 "
+yum -y update && yum install curl -y
+else
+apt update -y && apt install curl -y
+fi	   
+else
+green " curl已安装，继续 "
+fi
 
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
 yellow "正在检测lxc/openvz架构的vps是否开启TUN………！"
