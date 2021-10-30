@@ -396,17 +396,21 @@ green "WARP(+)卸载完成"
 
 function ocwarp(){
 WARPIPv4=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2)
+wg=$(systemctl is-enabled wg-quick@wgcf)
+if [[ $wg = enabled ]]; then
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
-yellow "当前WARP(+)已开启，执行临时关闭……"
+yellow "当前WARP(+)为--已开启--状态，现执行:临时关闭……"
 sleep 1s
 wg-quick down wgcf
 green "临时关闭WARP(+)成功"
 else
-yellow "当前WARP(+)已临时关闭，执行恢复开启……"
+yellow "当前WARP(+)为--临时关闭--状态，现执行:恢复开启……"
 sleep 1s
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP(+)成功"
+else
+red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
 fi
 white "============================================================================================="
 white "返回主菜单，请按任意键"
