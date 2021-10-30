@@ -411,6 +411,7 @@ yellow "当前WARP(+)为--临时关闭--状态，现执行:恢复开启……"
 sleep 1s
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP(+)成功"
+fi
 white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
