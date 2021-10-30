@@ -144,13 +144,13 @@ rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.
 
 if ! type curl >/dev/null 2>&1; then 
 if [ $release = "Centos" ]; then
-yellow " 检测到curl未安装，安装中 "
+yellow "检测到curl未安装，安装中 "
 yum -y update && yum install curl -y
 else
 apt update -y && apt install curl -y
 fi	   
 else
-green " curl已安装，继续 "
+green "curl已安装，继续 "
 fi
 
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
@@ -315,15 +315,14 @@ else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
-green " 安装结束！ "
+green "安装结束！ "
 white "=========================================="
-white " IPV4：当前WARP(+)及IP相关信息如下"
-blue " ${WARPIPv4Status}"
+white "IPV4：当前WARP(+)及IP相关信息如下"
+blue "${WARPIPv4Status}"
 white "------------------------------------------"
-white " IPV6：当前WARP(+)及IP相关信息如下"
-blue " ${WARPIPv6Status}"
+white "IPV6：当前WARP(+)及IP相关信息如下"
+blue "${WARPIPv6Status}"
 white "=========================================="
-white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
