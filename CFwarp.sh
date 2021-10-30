@@ -400,6 +400,7 @@ WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | c
 wg=$(systemctl is-enabled wg-quick@wgcf)
 if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
+bash CFwarp.sh
 fi
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 yellow "当前WARP(+)为--已开启--状态，现执行:临时关闭……"
