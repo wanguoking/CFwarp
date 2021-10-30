@@ -459,27 +459,27 @@ v66=`wget -T1 -t1 -qO- -6 ip.gs`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
-bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
-red " 切记：进入脚本快捷方式 bash CFwarp.sh "    
+blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
+blue " 切记：进入脚本快捷方式 bash CFwarp.sh "    
 white " ==================一、VPS相关调整选择（更新中）=========================================="    
 green "  1. 开启甲骨文VPS系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " =================二、WARP功能选择（更新中）=========================================="
-yellow " 经检测，你的VPS原生类型：双栈IPV6+IPV4------（5.6.7）三方案可随意切换安装"
+rrde " 经检测，你的VPS原生IP类型：双栈IPV6+IPV4------（5.6.7）三方案可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP接管，支持IP分流             "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP接管，支持IP分流      "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP接管，支持IP分流               "    
 white " ---------------------------------------------------------------------------------"    
-green "  8. 获取WARP+账户无限刷流量 "
-green "  9. 手动无限刷新WARP的IP(WARP防失联)"    
-green " 10. 卸载WARP功能 "
-green " 11. 开启或关闭WARP功能 "
+green "  8. 无限刷取WARP+账户流量 "
+green "  9. 手动无限刷新WARP的IP"    
+green " 10. 开启或关闭WARP功能 "
+green " 11. 彻底卸载WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
 green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
-red " 0. 退出脚本 "
+green " 0. 退出脚本 "
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
@@ -493,35 +493,35 @@ case "$menuNumberInput" in
  7 ) ABC1=${ud4ud6} && ABC2=${c5}; ins;;
  8 ) warpplus;;
  9 ) warpip;;	
-10 ) cwarp;;
-11 ) ocwarp;;
+10 ) ocwarp;;
+11 ) cwarp;;
 12 ) macka;;
  0 ) exit 0;;
 esac
   
 elif [[ -n ${v66} && -z ${v44} ]]; then
 clear
-bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-red " 切记：进入脚本快捷方式 bash CFwarp.sh "
+blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
+blue " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-yellow " 经检测，你的VPS原生类型：纯IPV6------（5.6.7）三方案可随意切换安装"
+rred " 经检测，你的VPS原生IP类型：纯IPV6------（5.6.7）三方案可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP接管，支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV6由WARP接管，无IPV4，不支持IP分流     "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP接管，支持IP分流               " 
 white " ---------------------------------------------------------------------------------"
-green "  8. 获取WARP+账户无限刷流量 "
-green "  9. 手动无限刷新WARP的IP(WARP防失联)"
-green " 10. 卸载WARP功能 "
-green " 11. 开启或关闭WARP功能 "
+green "  8. 无限刷取WARP+账户流量 "
+green "  9. 手动无限刷新WARP的IP"    
+green " 10. 开启或关闭WARP功能 "
+green " 11. 彻底卸载WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
 green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
-red " 0. 退出脚本 "
+green " 0. 退出脚本 "
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
@@ -535,35 +535,35 @@ case "$menuNumberInput" in
  7 ) ABC1=${ud6} && ABC2=${c4} && ABC3=${c5}; ins;;
  8 ) warpplus;;
  9 ) warpip;;	
-10 ) cwarp;;
-11 ) ocwarp;;
+10 ) ocwarp;;
+11 ) cwarp;;
 12 ) macka;;
  0 ) exit 0;;
 esac
 
 elif [[ -z ${v66} && -n ${v44} ]]; then
 clear
-bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-red " 切记：进入脚本快捷方式 bash CFwarp.sh "
+blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
+blue " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS的系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-yellow " 经检测，你的VPS原生类型：纯IPV4------（5.6.7）三方案可随意切换安装"
+rred " 经检测，你的VPS原生IP类型：纯IPV4------（5.6.7）三方案可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV4由WARP接管，无IPV6，不支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP接管，支持IP分流    "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP接管，支持IP分流           "
 white " ---------------------------------------------------------------------------------"
-green "  8. 获取WARP+账户无限刷流量 "
-green "  9. 手动无限刷新WARP的IP(WARP防失联)"
-green " 10. 卸载WARP功能 "
-green " 11. 开启或关闭WARP功能 "
+green "  8. 无限刷取WARP+账户流量 "
+green "  9. 手动无限刷新WARP的IP"    
+green " 10. 开启或关闭WARP功能 "
+green " 11. 彻底卸载WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
 green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
-red " 0. 退出脚本 "
+green " 0. 退出脚本 "
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
@@ -577,8 +577,8 @@ case "$menuNumberInput" in
  7 ) ABC1=${ud4} && ABC2=${c3} && ABC3=${c5}; ins;;
  8 ) warpplus;;
  9 ) warpip;;	
-10 ) cwarp;;
-11 ) ocwarp;;
+10 ) ocwarp;;
+11 ) cwarp;;
 12 ) macka;;
  0 ) exit 0;;
 esac
