@@ -403,8 +403,7 @@ WARPIPv4=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | c
 WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2)
 wg=$(systemctl is-enabled wg-quick@wgcf >/dev/null 2>&1)
 if [[ ! $wg = enabled ]]; then
-red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)，返回主菜单"
-bash CFwarp.sh
+red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
 fi
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 yellow "当前WARP(+)为--已开启--状态，现执行:临时关闭……"
