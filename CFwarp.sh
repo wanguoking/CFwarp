@@ -74,8 +74,8 @@ sys(){
 op=`sys`
 vi=`systemd-detect-virt`
 AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
-asn4=`curl -s4m1 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-asn6=`curl -s6m1 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
+asn4=`curl -s4m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
+asn6=`curl -s6m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
 v44=`curl -s4m3 https://ip.gs -k`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
