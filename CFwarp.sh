@@ -74,8 +74,8 @@ sys(){
 op=`sys`
 vi=`systemd-detect-virt`
 AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
-asn4=`curl -s4m4 https://ip.nisekoo.com -k | awk 'NR==4'`
-asn6=`curl -s6m4 https://ip.nisekoo.com -k | awk 'NR==4'`
+asn4=`curl -s4m5 https://ip.nisekoo.com -k | awk 'NR==4'`
+asn6=`curl -s6m5 https://ip.nisekoo.com -k | awk 'NR==4'`
 v44=`curl -s4m3 https://ip.gs`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
@@ -244,8 +244,8 @@ systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
 
-asn4=`curl -s4m4 https://ip.nisekoo.com -k | awk 'NR==4'`
-asn6=`curl -s6m4 https://ip.nisekoo.com -k | awk 'NR==4'`
+asn4=`curl -s4m5 https://ip.nisekoo.com -k | awk 'NR==4'`
+asn6=`curl -s6m5 https://ip.nisekoo.com -k | awk 'NR==4'`
 v44=`curl -s4m3 https://ip.gs`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
@@ -292,7 +292,7 @@ white "------------------------------------------"
 white "IPV6：当前WARP(+)及IP相关信息如下"
 blue "${WARPIPv6Status}"
 white "=========================================="
-white "返回主菜单，请按任意键"
+white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
 bash CFwarp.sh
@@ -306,7 +306,7 @@ fi
 systemctl restart wg-quick@wgcf
 green "刷新并修复WARP(+)的IP成功！"
 white "============================================================================================="
-white "返回主菜单，请按任意键"
+white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
 bash CFwarp.sh
@@ -347,7 +347,7 @@ else
 green "检测完毕：已开启BBR加速"
 fi
 white "============================================================================================="
-white "返回主菜单，请按任意键"
+white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
 bash CFwarp.sh
@@ -383,7 +383,7 @@ systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP(+)成功"
 fi
 white "============================================================================================="
-white "返回主菜单，请按任意键"
+white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
 bash CFwarp.sh
@@ -400,7 +400,7 @@ wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-
 function Netflix(){
 wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/missuo/SimpleNetflix/nf.sh && chmod +x nf.sh && ./nf.sh
 white "============================================================================================="
-white "返回主菜单，请按任意键"
+white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
 char=$(get_char)
 bash CFwarp.sh
