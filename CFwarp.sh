@@ -25,7 +25,7 @@ rred(){
 }
 
 if [[ $EUID -ne 0 ]]; then
-yellow " 请以root模式运行脚本。"
+yellow "请以root模式运行脚本。"
 rm -f CFwarp.sh
 exit 1
 fi
@@ -45,13 +45,23 @@ release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 release="Centos"
 else 
-red " 不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
+red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
 rm -f CFwarp.sh
 exit 1
 fi
 
-sleep 1s
-yellow " 等待3秒……检测vps中……"
+if ! type curl >/dev/null 2>&1; then 
+if [ $release = "Centos" ]; then
+yellow "检测到curl未安装，安装中 "
+yum -y update && yum install curl -y
+else
+apt update -y && apt install curl -y
+fi	   
+else
+green "curl已安装，继续 "
+fi
+
+yellow "等待3秒……检测vps中……"
 bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
@@ -64,39 +74,41 @@ sys(){
 op=`sys`
 vi=`systemd-detect-virt`
 AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
-v44=`wget -T1 -t1 -qO- -4 ip.gs`
+asn4=`curl -s4m3 https://ip.nisekoo.com -k | awk 'NR==4'`
+asn6=`curl -s6m3 https://ip.nisekoo.com -k | awk 'NR==4'`
+v44=`curl -s4m3 https://ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`wget -T1 -t1 -qO- -4 ipget.net/country-iso`
+gj4=`curl -s4m3 https://ipget.net/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4") 
 ;;  
 on) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4") 
 ;; 
 off) 
-WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
+WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`wget -T1 -t1 -qO- -6 ip.gs`
+v66=`curl -s6m3 https://ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`wget -T1 -t1 -qO- -6 ipget.net/country-iso`
+gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6") 
 ;;  
 on) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6") 
 ;; 
 off) 
-WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
+WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
@@ -113,8 +125,6 @@ c5="sed -i 's/1.1.1.1/8.8.8.8,2001:4860:4860::8888/g' wgcf-profile.conf"
 c6="sed -i 's/1.1.1.1/2001:4860:4860::8888,8.8.8.8/g' wgcf-profile.conf"
 
 Print_ALL_Status_menu() {
-white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-white " VPS系统信息如下："
 blue " 操作系统名称 - $op "
 blue " 系统内核版本 - $version " 
 blue " CPU架构名称  - $bit "
@@ -141,17 +151,6 @@ stty $SAVEDSTTY
 function ins(){
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
 rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf
-
-if ! type curl >/dev/null 2>&1; then 
-if [ $release = "Centos" ]; then
-yellow "检测到curl未安装，安装中 "
-yum -y update && yum install curl -y
-else
-apt update -y && apt install curl -y
-fi	   
-else
-green "curl已安装，继续 "
-fi
 
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
 yellow "正在检测lxc/openvz架构的vps是否开启TUN………！"
@@ -191,7 +190,7 @@ apt -y install lsb-release
 echo "deb http://deb.debian.org/debian $(lsb_release -sc)-backports main" | tee /etc/apt/sources.list.d/backports.list
 apt update -y
 apt -y --no-install-recommends install net-tools iproute2 openresolv dnsutils wireguard-tools               		
-if [ "$main" -lt 5 ]|| [ "$minor" -lt 6 ]; then 
+if [ "$main" -lt 5 ]|| [ "$minor" -lt 6 ]; then
 if [[ ${vi} == "kvm" || ${vi} == "xen" || ${vi} == "microsoft" ]]; then
 green "经检测，内核小于5.6版本，安装WARP内核模块模式"
 yellow "内核升级到5.6版本以上，即可安装最高效的WARP内核集成模式"
@@ -241,79 +240,49 @@ echo $ABC4 | sh
 mv -f wgcf-profile.conf /etc/wireguard/wgcf.conf >/dev/null 2>&1
 mv -f wgcf-account.toml /etc/wireguard/wgcf-account.toml >/dev/null 2>&1
 
-wg-quick up wgcf >/dev/null 2>&1
-v4=$(wget -T1 -t1 -qO- -4 ip.gs)
-v6=$(wget -T1 -t1 -qO- -6 ip.gs)
-until [[ -n $v4 || -n $v6 ]]
-do
-wg-quick down wgcf >/dev/null 2>&1
-wg-quick up wgcf >/dev/null 2>&1
-v4=$(wget -T1 -t1 -qO- -4 ip.gs)
-v6=$(wget -T1 -t1 -qO- -6 ip.gs)
-done
-
 systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
 
-yellow "添加重启VPS时，自动修复WARP功能"
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/sip.sh >/dev/null 2>&1
-if [ ${release} = "Centos" ]; then  
-yum install vixie-cron crontabs >/dev/null 2>&1
-chkconfig crond on >/dev/null 2>&1
-systemctl start crond.service >/dev/null 2>&1
-sed -i '/sip.sh/d' /var/spool/cron/root >/dev/null 2>&1
-echo "@reboot /root/sip.sh >/dev/null 2>&1" >> /var/spool/cron/root
-chmod 777 /var/spool/cron/root
-crontab /var/spool/cron/root
-systemctl restart crond.service
-else
-apt install cron >/dev/null 2>&1
-sed -i '/sip.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-echo "@reboot /root/sip.sh >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
-chmod 777 /var/spool/cron/crontabs/root
-crontab /var/spool/cron/crontabs/root
-systemctl restart cron.service
-fi
-green "设置完成"
-
-v44=`wget -T1 -t1 -qO- -4 ip.gs`
+asn4=`curl -s4m3 https://ip.nisekoo.com -k | awk 'NR==4'`
+asn6=`curl -s6m3 https://ip.nisekoo.com -k | awk 'NR==4'`
+v44=`curl -s4m3 https://ip.gs`
 if [[ -n ${v44} ]]; then
-gj4=`wget -T1 -t1 -qO- -4 ipget.net/country-iso`
+gj4=`curl -s4m3 https://ipget.net/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4") 
 ;;  
 on) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4") 
+WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4") 
 ;; 
 off) 
-WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4")
+WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`wget -T1 -t1 -qO- -6 ip.gs`
+v66=`curl -s6m3 https://ip.gs`
 if [[ -n ${v66} ]]; then 
-gj6=`wget -T1 -t1 -qO- -6 ipget.net/country-iso`
+gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6") 
 ;;  
 on) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6") 
+WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6") 
 ;; 
 off) 
-WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6")
+WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
-fi 
+fi
 
 green "安装结束！ "
 white "=========================================="
@@ -330,11 +299,12 @@ bash CFwarp.sh
 }
 
 function warpip(){
-wg=$(systemctl is-enabled wg-quick@wgcf >/dev/null 2>&1)
+wg=$(systemctl is-enabled wg-quick@wgcf)
 if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
 fi
-bash sip.sh
+systemctl restart wg-quick@wgcf
+green "刷新并修复WARP(+)的IP成功！"
 white "============================================================================================="
 white "返回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
@@ -384,33 +354,30 @@ bash CFwarp.sh
 }
 
 function cwarp(){
-wg-quick down wgcf >/dev/null 2>&1
 systemctl disable wg-quick@wgcf >/dev/null 2>&1
 if [ $release = "Centos" ]; then
 yum -y autoremove wireguard-tools wireguard-dkms
 else 
 apt -y autoremove wireguard-tools wireguard-dkms
 fi
-sed -i '/sip.sh/d' /var/spool/cron/root >/dev/null 2>&1
-sed -i '/sip.sh/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf sip.sh ucore.sh nf.sh CFwarp.sh
+rm -rf /usr/local/bin/wgcf /etc/wireguard/wgcf.conf /etc/wireguard/wgcf-account.toml /usr/bin/wireguard-go wgcf-account.toml wgcf-profile.conf ucore.sh nf.sh CFwarp.sh
 green "WARP(+)卸载完成"
 }
 
 function ocwarp(){
-WARPIPv4=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2)
-wg=$(systemctl is-enabled wg-quick@wgcf >/dev/null 2>&1)
+WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
+wg=$(systemctl is-enabled wg-quick@wgcf)
 if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
 fi
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
-yellow "当前WARP(+)为--已开启--状态，现执行:临时关闭……"
+yellow "当前WARP(+)为--已开启状态，现执行:临时关闭……"
 sleep 1s
 wg-quick down wgcf
 green "临时关闭WARP(+)成功"
 else
-yellow "当前WARP(+)为--临时关闭--状态，现执行:恢复开启……"
+yellow "当前WARP(+)为--临时关闭状态，现执行:恢复开启……"
 sleep 1s
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "恢复开启WARP(+)成功"
@@ -444,16 +411,16 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/ma
 }
 
 function start_menu(){
-WARPIPv4=$(wget -T1 -t1 -qO- -4 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
-WARPIPv6=$(wget -T1 -t1 -qO- -6 www.cloudflare.com/cdn-cgi/trace | grep warp | cut -d= -f2) 
+WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
-v44=`wget -T1 -t1 -qO- -4 ip.gs`
-v66=`wget -T1 -t1 -qO- -6 ip.gs`
+v44=`curl -s4m3 https://ip.gs`
+v66=`curl -s6m3 https://ip.gs`
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 else
-v44=`wget -T1 -t1 -qO- -4 ip.gs`
-v66=`wget -T1 -t1 -qO- -6 ip.gs`
+v44=`curl -s4m3 https://ip.gs`
+v66=`curl -s6m3 https://ip.gs`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
@@ -465,20 +432,22 @@ green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " =================二、WARP功能选择（更新中）=========================================="
-white " 经检测，你的VPS原生IP类型：双栈IPV6+IPV4"
 white " 以下（5.6.7）三个方案可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP(+)接管，支持IP分流             "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP(+)接管，支持IP分流      "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP(+)接管，支持IP分流               "    
 white " ---------------------------------------------------------------------------------"    
 green "  8. 无限刷取WARP+PLUS账户流量 "
-green "  9. 手动无限刷新WARP的IP"    
+green "  9. 无限刷新并修复WARP的IP"    
 green " 10. 开启或关闭WARP功能 "
 green " 11. 彻底卸载WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
 green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
 green " 0. 退出脚本 "
+white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+white " VPS系统信息如下："
+blue " 原生真IP特征 - 双栈IPV6+IPV4的VPS"
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
@@ -508,20 +477,22 @@ green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-white " 经检测，你的VPS原生IP类型：纯IPV6"
 white " 以下（5.6.7）三个方案可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP(+)接管，支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV6由WARP(+)接管，无IPV4，不支持IP分流     "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP(+)接管，支持IP分流               " 
 white " ---------------------------------------------------------------------------------"
 green "  8. 无限刷取WARP+PLUS账户流量 "
-green "  9. 手动无限刷新WARP的IP"    
+green "  9. 无限刷新并修复WARP的IP"    
 green " 10. 开启或关闭WARP功能 "
 green " 11. 彻底卸载WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
 green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
 green " 0. 退出脚本 "
+white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+white " VPS系统信息如下："
+blue " 原生真IP特征 - 纯IPV6的VPS"
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
@@ -551,20 +522,22 @@ green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-green " 经检测，你的VPS原生IP类型：纯IPV4"
 green " 以下（5.6.7）三个方案可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV4由WARP(+)接管，无IPV6，不支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP(+)接管，支持IP分流    "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP(+)接管，支持IP分流           "
 white " ---------------------------------------------------------------------------------"
 green "  8. 无限刷取WARP+PLUS账户流量 "
-green "  9. 手动无限刷新WARP的IP"    
+green "  9. 无限刷新并修复WARP的IP"    
 green " 10. 开启或关闭WARP功能 "
 green " 11. 彻底卸载WARP功能 "
 white " ==================三、代理协议脚本选择（更新中）==========================================="
 green " 12.使用mack-a脚本（支持Xray, V2ray） "
 white " ============================================================================================="
 green " 0. 退出脚本 "
+white "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+white " VPS系统信息如下："
+blue " 原生真IP特征 - 纯IPV4的VPS"
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
