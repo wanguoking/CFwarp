@@ -80,7 +80,7 @@ v44=`curl -s4m3 https://ip.gs -k`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(curl -s4m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
 WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4") 
@@ -99,7 +99,7 @@ v66=`curl -s6m3 https://ip.gs`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(curl -s6m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
 WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6") 
@@ -244,13 +244,13 @@ systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
 
-asn4=`curl -s4m1 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-asn6=`curl -s6m1 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
+asn4=`curl -s4m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
+asn6=`curl -s6m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
 v44=`curl -s4m3 https://ip.gs -k`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
 g4=$(eval echo \$$gj4)
-WARPIPv4Status=$(curl -s4m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
 WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP来源处：$asn4") 
@@ -269,7 +269,7 @@ v66=`curl -s6m3 https://ip.gs`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
-WARPIPv6Status=$(curl -s6m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
 WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP来源处：$asn6") 
@@ -287,10 +287,10 @@ fi
 green " 安装结束！ "
 white "=========================================="
 white " IPV4：当前WARP(+)及IP相关信息如下"
-blue "${WARPIPv4Status}"
+blue " ${WARPIPv4Status}"
 white "------------------------------------------"
 white " IPV6：当前WARP(+)及IP相关信息如下"
-blue "${WARPIPv6Status}"
+blue " ${WARPIPv6Status}"
 white "=========================================="
 white " 回主菜单，请按任意键"
 white " 退出脚本，请按Ctrl+C"
@@ -365,8 +365,8 @@ green "WARP(+)卸载完成"
 }
 
 function ocwarp(){
-WARPIPv4=$(curl -s4m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
-WARPIPv6=$(curl -s6m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
+WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
 wg=$(systemctl is-enabled wg-quick@wgcf)
 if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
@@ -411,8 +411,8 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/ma
 }
 
 function start_menu(){
-WARPIPv4=$(curl -s4m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
-WARPIPv6=$(curl -s6m1 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
 v44=`curl -s4m3 https://ip.gs -k`
