@@ -292,8 +292,7 @@ blue " ${WARPIPv6Status}"
 white "=========================================="
 white " 回主菜单，请按任意键"
 white " 退出脚本，请按Ctrl+C"
-char=$(get_char)
-bash CFwarp.sh
+char=$(get_char) && bash CFwarp.sh
 }
 
 function warpip(){
@@ -307,8 +306,7 @@ fi
 white "============================================================================================="
 white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
-char=$(get_char)
-bash CFwarp.sh
+char=$(get_char) && bash CFwarp.sh
 }
 
 function warpplus(){
@@ -348,8 +346,7 @@ fi
 white "============================================================================================="
 white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
-char=$(get_char)
-bash CFwarp.sh
+char=$(get_char) && bash CFwarp.sh
 }
 
 function cwarp(){
@@ -384,8 +381,7 @@ fi
 white "============================================================================================="
 white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
-char=$(get_char)
-bash CFwarp.sh
+char=$(get_char) && bash CFwarp.sh
 }
 
 function macka(){
@@ -401,8 +397,7 @@ wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/missuo/SimpleNetflix/
 white "============================================================================================="
 white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
-char=$(get_char)
-bash CFwarp.sh
+char=$(get_char) && bash CFwarp.sh
 }
 
 function up4(){
