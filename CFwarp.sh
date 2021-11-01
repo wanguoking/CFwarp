@@ -164,10 +164,8 @@ exit 1
 fi
 fi
 
-if [[ ${vi} == "lxc" ]]; then
-if [ $release = "Centos" ]; then
+if [[ ${vi} == "lxc" ]] && [ $release = "Centos" ]; then
 echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
-fi
 fi
 
 if [ $release = "Centos" ]; then  
@@ -299,12 +297,13 @@ bash CFwarp.sh
 }
 
 function warpip(){
-wg=$(systemctl is-enabled wg-quick@wgcf)
+wg=$(systemctl is-enabled wg-quick@wgcf 2>/dev/null)
 if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
-fi
-systemctl restart wg-quick@wgcf
+else
+systemctl restart wg-quick@wgcf >/dev/null 2>&1
 green "刷新并修复WARP(+)的IP成功！"
+fi
 white "============================================================================================="
 white "回主菜单，请按任意键"
 white "退出脚本，请按Ctrl+C"
@@ -367,11 +366,11 @@ green "WARP(+)卸载完成"
 function ocwarp(){
 WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
-wg=$(systemctl is-enabled wg-quick@wgcf)
+wg=$(systemctl is-enabled wg-quick@wgcf 2>/dev/null)
 if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
 fi
-if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
+if [[ $wg = enabled ]] && [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 yellow "当前WARP(+)为--已开启状态，现执行:临时关闭……"
 sleep 1s
 wg-quick down wgcf
@@ -425,14 +424,14 @@ fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
 blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
-blue " 切记：进入脚本快捷方式 bash CFwarp.sh "    
+yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "    
 white " ==================一、VPS相关调整选择（更新中）=========================================="    
 green "  1. 开启甲骨文VPS系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " =================二、WARP功能选择（更新中）=========================================="
-white " 以下（5.6.7）三个方案可随意切换安装"
+yellow " 以下（5.6.7）为安装WARP(+)三个方案，可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP(+)接管，支持IP分流             "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP(+)接管，支持IP分流      "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP(+)接管，支持IP分流               "    
@@ -470,14 +469,14 @@ esac
 elif [[ -n ${v66} && -z ${v44} ]]; then
 clear
 blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-blue " 切记：进入脚本快捷方式 bash CFwarp.sh "
+yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-white " 以下（5.6.7）三个方案可随意切换安装"
+yellow " 以下（5.6.7）为安装WARP(+)三个方案，可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV6为原生，IPV4由WARP(+)接管，支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV6由WARP(+)接管，无IPV4，不支持IP分流     "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP(+)接管，支持IP分流               " 
@@ -515,14 +514,14 @@ esac
 elif [[ -z ${v66} && -n ${v44} ]]; then
 clear
 blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-blue " 切记：进入脚本快捷方式 bash CFwarp.sh "
+yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS的系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
 green "  3. 开启原生BBR加速 "
 green "  4. 检测奈飞Netflix是否解锁 "
 white " ==================二、WARP功能选择（更新中）==============================================="
-green " 以下（5.6.7）三个方案可随意切换安装"
+yellow " 以下（5.6.7）为安装WARP(+)三个方案，可随意切换安装"
 green "  5. 添加WARP虚拟IPV4，     IP出站流量表现为：IPV4由WARP(+)接管，无IPV6，不支持IP分流               "
 green "  6. 添加WARP虚拟IPV6，     IP出站流量表现为：IPV4为原生，IPV6由WARP(+)接管，支持IP分流    "
 green "  7. 添加WARP虚拟IPV4+IPV6，IP出站流量表现为：IPV6与IPV4都由WARP(+)接管，支持IP分流           "
