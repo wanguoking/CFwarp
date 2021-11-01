@@ -95,7 +95,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`curl -s6m3 https://ip.gs`
+v66=`curl -s6m3 https://ip.gs -k`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
@@ -265,7 +265,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`curl -s6m3 https://ip.gs`
+v66=`curl -s6m3 https://ip.gs -k`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
