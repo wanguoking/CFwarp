@@ -301,7 +301,7 @@ if [[ ! $wg = enabled ]]; then
 red "WARP(+)未安装，无法启动或关闭，建议重新安装WARP(+)"
 else
 systemctl restart wg-quick@wgcf >/dev/null 2>&1
-green "刷新并修复WARP(+)的IP成功！"
+green "刷新并修复WARP(+)的IP成功！请回主菜单查看更新后IP情况"
 fi
 white "============================================================================================="
 white "回主菜单，请按任意键"
