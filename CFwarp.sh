@@ -58,10 +58,10 @@ else
 apt update -y && apt install curl -y
 fi	   
 else
-green "curl已安装，继续 "
+green " curl已安装，继续 "
 fi
 
-yellow "等待5秒……检测vps中……"
+yellow " 等待5秒……检测vps中……"
 bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
@@ -418,8 +418,8 @@ v66=`curl -s6m3 https://ip.gs -k`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
-blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
-yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "    
+bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
+bblue " 切记：进入脚本快捷方式 bash CFwarp.sh "    
 white " ==================一、VPS相关调整选择（更新中）=========================================="    
 green "  1. 开启甲骨文VPS系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
@@ -463,8 +463,8 @@ esac
   
 elif [[ -n ${v66} && -z ${v44} ]]; then
 clear
-blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "
+bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
+bblue " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
@@ -508,8 +508,8 @@ esac
 
 elif [[ -z ${v66} && -n ${v44} ]]; then
 clear
-blue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
-yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "
+bblue " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
+bblue " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS的系统所有端口 "
 green "  2. 更新5.6以下系统内核至5.6以上 "
