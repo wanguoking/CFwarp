@@ -50,8 +50,8 @@ exit 1
 fi
 
 if ! type curl >/dev/null 2>&1; then 
-if [ $release = "Centos" ]; then
 yellow "检测到curl未安装，安装中 "
+if [ $release = "Centos" ]; then
 yum -y update && yum install curl -y
 else
 apt update -y && apt install curl -y
