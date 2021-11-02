@@ -60,7 +60,7 @@ else
 green " curl已安装，继续 "
 fi
 
-yellow " 等待5秒……扫描详细的vps类型及属性中……"
+yellow " 请稍等3秒……正在扫描vps类型及参数中……"
 bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
@@ -229,7 +229,7 @@ green "启用WARP+PLUS账户中，如上方显示：400 Bad Request，则使用�
 fi
 wgcf generate
 
-yellow "自动设置WARP(+)的MTU最佳网络吞吐值"
+yellow "开始自动设置WARP(+)的MTU最佳网络吞吐量值，以优化网速！"
 v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 MTUy=1500
