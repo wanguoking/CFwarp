@@ -76,7 +76,7 @@ vi=`systemd-detect-virt`
 AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
 asn4=`curl -s4m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
 asn6=`curl -s6m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-v44=`curl -s4m3 https://ip.gs -k`
+v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
 g4=$(eval echo \$$gj4)
@@ -95,7 +95,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`curl -s6m3 https://ip.gs -k`
+v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
@@ -231,8 +231,8 @@ fi
 wgcf generate
 
 yellow "自动设置MTU最佳值"
-v44=`curl -s4m3 https://ip.gs -k`
-v66=`curl -s6m3 https://ip.gs -k`
+v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 MTUy=1500
 MTUc=10
 if [[ -n ${v66} && -z ${v44} ]]; then
@@ -276,7 +276,7 @@ systemctl start wg-quick@wgcf
 
 asn4=`curl -s4m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
 asn6=`curl -s6m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-v44=`curl -s4m3 https://ip.gs -k`
+v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 if [[ -n ${v44} ]]; then
 gj4=`curl -s4m3 https://ipget.net/country-iso -k`
 g4=$(eval echo \$$gj4)
@@ -295,7 +295,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`curl -s6m3 https://ip.gs -k`
+v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 if [[ -n ${v66} ]]; then 
 gj6=`curl -s6m3 https://ipget.net/country-iso -k`
 g6=$(eval echo \$$gj6)
@@ -441,12 +441,12 @@ WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | 
 WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
-v44=`curl -s4m3 https://ip.gs -k`
-v66=`curl -s6m3 https://ip.gs -k`
+v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 else
-v44=`curl -s4m3 https://ip.gs -k`
-v66=`curl -s6m3 https://ip.gs -k`
+v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
