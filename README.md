@@ -276,6 +276,8 @@ wg-quick up wgcf
 ---------------------------------------------------------------------------------------------------------
 #### 感谢P3terx大及原创者们，参考来源：
 
+https://github.com/P3TERX/warp.sh
+
 https://p3terx.com/archives/debian-linux-vps-server-wireguard-installation-tutorial.html
 
 https://p3terx.com/archives/use-cloudflare-warp-to-add-extra-ipv4-or-ipv6-network-support-to-vps-servers-for-free.html
