@@ -230,7 +230,7 @@ green "启用WARP+PLUS账户中，如上方显示：400 Bad Request，则使用�
 fi
 wgcf generate
 
-yellow "自动设置MTU最佳值"
+yellow "自动设置WARP(+)的MTU最佳网络吞吐值"
 v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
 MTUy=1500
