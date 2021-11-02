@@ -341,10 +341,15 @@ char=$(get_char) && bash CFwarp.sh
 }
 
 function warpplus(){
+if ! type python3 >/dev/null 2>&1; then 
+yellow "检测到python3未安装，安装中 "
 if [ $release = "Centos" ]; then
 yum -y install python3
 else 
 apt -y install python3
+fi
+else
+green "python3已安装"
 fi
 wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/warp-plus/wp.py
 python3 wp.py
