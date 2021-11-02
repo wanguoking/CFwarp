@@ -269,7 +269,7 @@ echo $ABC4 | sh
 
 mv -f wgcf-profile.conf /etc/wireguard/wgcf.conf >/dev/null 2>&1
 mv -f wgcf-account.toml /etc/wireguard/wgcf-account.toml >/dev/null 2>&1
-yellow " 请稍等3秒，获取WARP(+)IP中…………"
+yellow "请稍等3秒，获取WARP(+)IP中…………"
 systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
@@ -314,7 +314,7 @@ else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi
 
-green " 安装结束！VPS出站IP结果如下 "
+green "安装结束！VPS出站IP结果如下 "
 white "=========================================="
 white " IPV4：当前WARP(+)及IP相关信息"
 blue " ${WARPIPv4Status}"
