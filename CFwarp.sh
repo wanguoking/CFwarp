@@ -26,7 +26,6 @@ rred(){
 
 if [[ $EUID -ne 0 ]]; then
 yellow "请以root模式运行脚本。"
-rm -f CFwarp.sh
 exit 1
 fi
 
