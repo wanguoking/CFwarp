@@ -230,6 +230,38 @@ green "启用WARP+PLUS账户中，如上方显示：400 Bad Request，则使用�
 fi
 wgcf generate
 
+yellow "自动设置MTU最佳值"
+v44=`curl -s4m3 https://ip.gs -k`
+v66=`curl -s6m3 https://ip.gs -k`
+MTUy=1500
+MTUc=10
+if [[ -n ${v66} && -z ${v44} ]]; then
+ping='ping6'
+IP1='2606:4700:4700::1001'
+IP2='2001:4860:4860::8888'
+else
+ping='ping'
+IP1='1.1.1.1'
+IP2='8.8.8.8'
+fi
+while true; do
+if ${ping} -c1 -W1 -s$((${MTUy} - 28)) -Mdo ${IP1} >/dev/null 2>&1 || ${ping} -c1 -W1 -s$((${MTUy} - 28)) -Mdo ${IP2} >/dev/null 2>&1; then
+MTUc=1
+MTUy=$((${MTUy} + ${MTUc}))
+else
+MTUy=$((${MTUy} - ${MTUc}))
+if [[ ${MTUc} = 1 ]]; then
+break
+fi
+fi
+if [[ ${MTUy} -le 1360 ]]; then
+MTUy='1360'
+break
+fi
+done
+MTU=$((${MTUy} - 80))
+
+sed -i "s/MTU.*/MTU = $MTU/g" wgcf-profile.conf
 echo $ABC1 | sh
 echo $ABC2 | sh
 echo $ABC3 | sh
@@ -237,7 +269,7 @@ echo $ABC4 | sh
 
 mv -f wgcf-profile.conf /etc/wireguard/wgcf.conf >/dev/null 2>&1
 mv -f wgcf-account.toml /etc/wireguard/wgcf-account.toml >/dev/null 2>&1
-yellow "请稍等3秒，获取WARP(+)IP中…………"
+yellow " 请稍等3秒，获取WARP(+)IP中…………"
 systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
@@ -282,7 +314,7 @@ else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi
 
-green " 安装结束！出站IP结果如下 "
+green " 安装结束！VPS出站IP结果如下 "
 white "=========================================="
 white " IPV4：当前WARP(+)及IP相关信息"
 blue " ${WARPIPv4Status}"
