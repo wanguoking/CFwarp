@@ -60,7 +60,7 @@ else
 green " curl已安装，继续 "
 fi
 
-yellow " 等待5秒……检测vps中……"
+yellow " 等待5秒……扫描详细的vps类型及属性中……"
 bit=`uname -m`
 version=`uname -r | awk -F "-" '{print $1}'`
 main=`uname  -r | awk -F . '{print $1 }'`
