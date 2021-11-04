@@ -450,7 +450,7 @@ v44=`curl -s4m3 https://ip.gs -k`
 v66=`curl -s6m3 https://ip.gs -k`
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 else
-v44=`curl -s4m3 https://ip.gs -k'`
+v44=`curl -s4m3 https://ip.gs -k`
 v66=`curl -s6m3 https://ip.gs -k`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
