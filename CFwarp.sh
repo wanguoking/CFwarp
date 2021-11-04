@@ -83,13 +83,13 @@ g4=`curl -s http://ip-api.com/$(curl -s4m3 https://ip.gs -k)?lang=zh-CN -k | gre
 WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP服务商：$asn4") 
+WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; rred "WARP+PLUS正在运行" ; white " IPV4 当前地址：\c" ; rred "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$asn4") 
 ;;  
 on) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP服务商：$asn4") 
+WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; green "WARP正在运行" ; white " IPV4 当前地址：\c" ; green "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$asn4")
 ;; 
 off) 
-WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP服务商：$asn4")
+WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; yellow "WARP未启用" ; white " IPV4 当前地址：\c" ; yellow "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$asn4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
@@ -101,13 +101,13 @@ g6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k)?lang=zh-CN -k | gre
 WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：\c" ; green "WARP+PLUS正在运行" ; green " IPV6 当前地址：\c" ; green "$v66" ; green " IPV6 所在区域：\c" ; green "$g6" ; green " IPV6 IP服务商：\c" ; green "$asn6") 
+WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; rred "WARP+PLUS正在运行" ; white " IPV6 当前地址：\c" ; rred "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$asn6") 
 ;;  
 on) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：\c" ; green "WARP正在运行" ; green " IPV6 当前地址：\c" ; green "$v66" ; green " IPV6 所在区域：\c" ; green "$g6" ; green " IPV6 IP服务商：\c" ; green "$asn6")
+WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; green "WARP正在运行" ; white " IPV6 当前地址：\c" ; green "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$asn6")
 ;; 
 off) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：\c" ; green "WARP未启用" ; green " IPV6 当前地址：\c" ; green "$v66" ; green " IPV6 所在区域：\c" ; green "$g6" ; green " IPV6 IP服务商：\c" ; green "$asn6")
+WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; yellow "WARP未启用" ; white " IPV6 当前地址：\c" ; yellow "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$asn6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
@@ -284,13 +284,13 @@ g4=`curl -s http://ip-api.com/$(curl -s4m3 https://ip.gs -k)?lang=zh-CN -k | gre
 WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP+PLUS已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP服务商：$asn4") 
+WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; rred "WARP+PLUS正在运行" ; white " IPV4 当前地址：\c" ; rred "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$asn4") 
 ;;  
 on) 
-WARPIPv4Status=$(green "IPV4 WARP(+)状态：WARP已开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP服务商：$asn4") 
+WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; green "WARP正在运行" ; white " IPV4 当前地址：\c" ; green "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$asn4")
 ;; 
 off) 
-WARPIPv4Status=$(yellow "IPV4 WARP(+)状态：WARP未开启 \n IPV4 当前地址：$v44 \n IPV4 所在区域：$g4 \n IPV4 IP服务商：$asn4")
+WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; yellow "WARP未启用" ; white " IPV4 当前地址：\c" ; yellow "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$asn4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
@@ -302,13 +302,13 @@ g6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k)?lang=zh-CN -k | gre
 WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP+PLUS已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP服务商：$asn6") 
+WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; rred "WARP+PLUS正在运行" ; white " IPV6 当前地址：\c" ; rred "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$asn6") 
 ;;  
 on) 
-WARPIPv6Status=$(green "IPV6 WARP(+)状态：WARP已开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP服务商：$asn6") 
+WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; green "WARP正在运行" ; white " IPV6 当前地址：\c" ; green "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$asn6")
 ;; 
 off) 
-WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址：$v66 \n IPV6 所在区域：$g6 \n IPV6 IP服务商：$asn6")
+WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; yellow "WARP未启用" ; white " IPV6 当前地址：\c" ; yellow "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$asn6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
