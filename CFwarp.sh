@@ -72,13 +72,14 @@ sys(){
 }
 op=`sys`
 vi=`systemd-detect-virt`
-AE="阿联酋";AU="澳大利亚";BR="巴西";CA="加拿大";CH="瑞士";CL="智利";CN="中国";DE="德国";ES="西班牙";FI="芬兰";FR="法国";HK="香港";ID="印尼";IE="爱尔兰";IL="以色列";IN="印度";IT="意大利";JP="日本";KR="韩国";MY="马来西亚";NL="荷兰";NZ="新西兰";PH="菲律宾";RU="俄罗斯";SA="沙特";SE="瑞典";SG="新加坡";TW="台湾";UK="英国";US="美国";VN="越南";ZA="南非"
-asn4=`curl -s4m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-asn6=`curl -s6m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+asn4=`curl -s http://ip-api.com/$(curl -s4m3 https://ip.gs -k) | grep -i org | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g'`
+asn6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k) | grep -i org | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g'`
+if [[ ${vi} == "lxc" ]]; then
+asn6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k) | grep -i isp | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | awk 'NR==1' | sed 's/\"//g'`
+fi
+v44=`curl -s4m3 https://ip.gs -k`
 if [[ -n ${v44} ]]; then
-gj4=`curl -s4m3 https://ipget.net/country-iso -k`
-g4=$(eval echo \$$gj4)
+g4=`curl -s http://ip-api.com/$(curl -s4m3 https://ip.gs -k)?lang=zh-CN -k | grep -i country | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g' | awk 'NR==1'`
 WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
@@ -94,10 +95,9 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v66=`curl -s6m3 https://ip.gs -k`
 if [[ -n ${v66} ]]; then 
-gj6=`curl -s6m3 https://ipget.net/country-iso -k`
-g6=$(eval echo \$$gj6)
+g6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k)?lang=zh-CN -k | grep -i country | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g' | awk 'NR==1'`
 WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
@@ -273,12 +273,14 @@ systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
 
-asn4=`curl -s4m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-asn6=`curl -s6m3 ip.p3terx.com -k | awk 'NR==3 {print $3}'`
-v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+asn4=`curl -s http://ip-api.com/$(curl -s4m3 https://ip.gs -k) | grep -i org | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g'`
+asn6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k) | grep -i org | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g'`
+if [[ ${vi} == "lxc" ]]; then
+asn6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k) | grep -i isp | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | awk 'NR==1' | sed 's/\"//g'`
+fi
+v44=`curl -s4m3 https://ip.gs -k`
 if [[ -n ${v44} ]]; then
-gj4=`curl -s4m3 https://ipget.net/country-iso -k`
-g4=$(eval echo \$$gj4)
+g4=`curl -s http://ip-api.com/$(curl -s4m3 https://ip.gs -k)?lang=zh-CN -k | grep -i country | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g' | awk 'NR==1'`
 WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
 plus) 
@@ -294,10 +296,9 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 
-v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v66=`curl -s6m3 https://ip.gs -k`
 if [[ -n ${v66} ]]; then 
-gj6=`curl -s6m3 https://ipget.net/country-iso -k`
-g6=$(eval echo \$$gj6)
+g6=`curl -s http://ip-api.com/$(curl -s6m3 https://ip.gs -k)?lang=zh-CN -k | grep -i country | awk -F ':' '{print $2}' | awk '$1=$1' | sed s'/.$//' | sed 's/\"//g' | awk 'NR==1'`
 WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
 plus) 
@@ -311,7 +312,7 @@ WARPIPv6Status=$(yellow "IPV6 WARP(+)状态：WARP未开启 \n IPV6 当前地址
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
-fi
+fi 
 
 green "安装结束！VPS出站IP结果如下 "
 white "=========================================="
