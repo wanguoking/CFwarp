@@ -446,12 +446,12 @@ WARPIPv4=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | 
 WARPIPv6=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 if [[ $WARPIPv6 = plus || $WARPIPv4 = plus || $WARPIPv6 = on || $WARPIPv4 = on ]]; then
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
-v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
-v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v44=`curl -s4m3 https://ip.gs -k`
+v66=`curl -s6m3 https://ip.gs -k`
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 else
-v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
-v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v44=`curl -s4m3 https://ip.gs -k'`
+v66=`curl -s6m3 https://ip.gs -k`
 fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
