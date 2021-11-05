@@ -363,10 +363,16 @@ green "甲骨文VPS的系统所有端口规则已打开"
 }
 
 function BBR(){
+if [[ ${vi} == "lxc" ]]; then
+red "你的VPS为lxc，目前不支持当前VPS的架构安装各类加速 "
+fi
+if [[ ${vi} == "openvz" ]]; then
+yellow "你的VPS为openvz，支持lkl-haproxy版的BBR-PLUS加速"
+wget --no-cache -O lkl-haproxy.sh https://github.com/mzz2017/lkl-haproxy/raw/master/lkl-haproxy.sh && bash lkl-haproxy.sh
+fi
 bbr=$(lsmod | grep bbr)
-if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
-red " 不支持当前VPS的架构，请使用KVM等主流架构的VPS "
-elif [[ -z ${bbr} ]]; then
+if [[ ${vi} == "kvm" || ${vi} == "xen" || ${vi} == "microsoft" ]]; then
+if [[ -z ${bbr} ]]; then
 yellow "检测完毕：未开启BBR加速，安装BBR加速中……" 
 sleep 2s
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf >/dev/null 2>&1
@@ -376,6 +382,7 @@ lsmod | grep bbr
 green "已开启BBR加速"
 else
 green "检测完毕：已开启BBR加速"
+fi
 fi
 white "============================================================================================="
 white "回主菜单，请按任意键"
