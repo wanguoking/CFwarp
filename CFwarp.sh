@@ -229,8 +229,8 @@ fi
 wgcf generate
 
 yellow "开始自动设置WARP(+)的MTU最佳网络吞吐量值，以优化网速！"
-v44=`curl -s4m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
-v66=`curl -s6m3 ip.p3terx.com -k | awk 'NR==1 {print $1}'`
+v66=`curl -s6m3 https://ip.gs -k`
+v44=`curl -s4m3 https://ip.gs -k`
 MTUy=1500
 MTUc=10
 if [[ -n ${v66} && -z ${v44} ]]; then
