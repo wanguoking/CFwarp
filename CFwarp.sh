@@ -86,10 +86,10 @@ plus)
 WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; rred "WARP+PLUS运行中" ; white " IPV4 当前地址：\c" ; rred "$v44" ; white " IPV4 所在区域：\c" ; rred "$g4" ; white " IPV4 IP服务商：\c" ; rred "$isp4") 
 ;;  
 on) 
-WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; green "WARP运行中" ; white " IPV4 当前地址：\c" ; green "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$isp4")
+WARPIPv4Status=$(white "IPV4 WARP状态：\c" ; green "WARP运行中" ; white " IPV4 当前地址：\c" ; green "$v44" ; white " IPV4 所在区域：\c" ; green "$g4" ; white " IPV4 IP服务商：\c" ; green "$isp4")
 ;; 
 off) 
-WARPIPv4Status=$(white "IPV4 WARP(+)状态：\c" ; yellow "WARP关闭中" ; white " IPV4 当前地址：\c" ; yellow "$v44" ; white " IPV4 所在区域：\c" ; yellow "$g4" ; white " IPV4 IP服务商：\c" ; yellow "$isp4")
+WARPIPv4Status=$(white "IPV4 WARP状态：\c" ; yellow "WARP关闭中" ; white " IPV4 当前地址：\c" ; yellow "$v44" ; white " IPV4 所在区域：\c" ; yellow "$g4" ; white " IPV4 IP服务商：\c" ; yellow "$isp4")
 esac 
 else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
@@ -103,10 +103,10 @@ plus)
 WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; rred "WARP+PLUS运行中" ; white " IPV6 当前地址：\c" ; rred "$v66" ; white " IPV6 所在区域：\c" ; rred "$g6" ; white " IPV6 IP服务商：\c" ; rred "$isp6") 
 ;;  
 on) 
-WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; green "WARP运行中" ; white " IPV6 当前地址：\c" ; green "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$isp6")
+WARPIPv6Status=$(white "IPV6 WARP状态：\c" ; green "WARP运行中" ; white " IPV6 当前地址：\c" ; green "$v66" ; white " IPV6 所在区域：\c" ; green "$g6" ; white " IPV6 IP服务商：\c" ; green "$isp6")
 ;; 
 off) 
-WARPIPv6Status=$(white "IPV6 WARP(+)状态：\c" ; yellow "WARP关闭中" ; white " IPV6 当前地址：\c" ; yellow "$v66" ; white " IPV6 所在区域：\c" ; yellow "$g6" ; white " IPV6 IP服务商：\c" ; yellow "$isp6")
+WARPIPv6Status=$(white "IPV6 WARP状态：\c" ; yellow "WARP关闭中" ; white " IPV6 当前地址：\c" ; yellow "$v66" ; white " IPV6 所在区域：\c" ; yellow "$g6" ; white " IPV6 IP服务商：\c" ; yellow "$isp6")
 esac 
 else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
@@ -128,10 +128,10 @@ blue " 系统内核版本 - $version "
 blue " CPU架构名称  - $bit "
 blue " 虚拟架构类型 - $vi "
 white "=========================================="
-white " IPV4：当前WARP(+)及IP相关信息如下"
+white " IPV4：当前接管出站流量表现如下"
 blue " ${WARPIPv4Status}"
 white "------------------------------------------"
-white " IPV6：当前WARP(+)及IP相关信息如下"
+white " IPV6：当前接管出站流量表现如下"
 blue " ${WARPIPv6Status}"
 white "=========================================="
 }
@@ -311,12 +311,12 @@ else
 WARPIPv6Status=$(red "不存在IPV6地址 ")
 fi 
 
-green "安装结束！VPS出站IP结果如下 "
+green " WARP(+)安装结束！ "
 white "=========================================="
-white " IPV4：当前WARP(+)及IP相关信息"
+white " IPV4：当前接管出站流量表现如下"
 blue " ${WARPIPv4Status}"
 white "------------------------------------------"
-white " IPV6：当前WARP(+)及IP相关信息"
+white " IPV6：当前接管出站流量表现如下"
 blue " ${WARPIPv6Status}"
 white "=========================================="
 white " 回主菜单，请按任意键"
