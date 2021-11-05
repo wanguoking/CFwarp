@@ -258,7 +258,7 @@ break
 fi
 done
 MTU=$((${MTUy} - 80))
-
+green "MTU最佳网络吞吐量值= $MTU 已设置完毕"
 sed -i "s/MTU.*/MTU = $MTU/g" wgcf-profile.conf
 echo $ABC1 | sh
 echo $ABC2 | sh
@@ -271,7 +271,7 @@ yellow "请稍等3秒，获取WARP(+)IP中…………"
 systemctl enable wg-quick@wgcf >/dev/null 2>&1
 wg-quick down wgcf >/dev/null 2>&1
 systemctl start wg-quick@wgcf
-
+green "WARP(+)IP获取成功"
 v66=`curl -s6m3 https://ip.gs -k`
 v44=`curl -s4m3 https://ip.gs -k`
 isp4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
