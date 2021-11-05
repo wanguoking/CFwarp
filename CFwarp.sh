@@ -529,7 +529,7 @@ white " ========================================================================
 green " 0. 退出脚本 "
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 white " VPS系统信息如下："
-blue " 原生真IP特征 - 纯IPV6的VPS"
+blue " 原生真IP特征 - Only纯IPV6的VPS"
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
@@ -575,7 +575,7 @@ white " ========================================================================
 green " 0. 退出脚本 "
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 white " VPS系统信息如下："
-blue " 原生真IP特征 - 纯IPV4的VPS"
+blue " 原生真IP特征 - Only纯IPV4的VPS"
 Print_ALL_Status_menu
 echo
 read -p "请输入数字:" menuNumberInput
