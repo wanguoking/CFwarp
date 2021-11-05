@@ -78,7 +78,7 @@ v44=`curl -s4m3 https://ip.gs -k`
 isp4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
 isp6=`curl -s https://api.ip.sb/geoip/$v66 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
 if [[ -n ${v44} ]]; then
-gj4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":]//g"`
+gj4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":}]//g"`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
@@ -95,7 +95,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 if [[ -n ${v66} ]]; then 
-gj6=`curl -s https://api.ip.sb/geoip/$v66 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":]//g"`
+gj6=`curl -s https://api.ip.sb/geoip/$v66 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":}]//g"`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
@@ -277,7 +277,7 @@ v44=`curl -s4m3 https://ip.gs -k`
 isp4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
 isp6=`curl -s https://api.ip.sb/geoip/$v66 -k | awk -F "isp" '{print $2}' | awk -F "offset" '{print $1}' | sed "s/[,\":]//g"`
 if [[ -n ${v44} ]]; then
-gj4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":]//g"`
+gj4=`curl -s https://api.ip.sb/geoip/$v44 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":}]//g"`
 g4=$(eval echo \$$gj4)
 WARPIPv4Status=$(curl -s4m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv4Status} in 
@@ -294,7 +294,7 @@ else
 WARPIPv4Status=$(red "不存在IPV4地址 ")
 fi 
 if [[ -n ${v66} ]]; then 
-gj6=`curl -s https://api.ip.sb/geoip/$v66 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":]//g"`
+gj6=`curl -s https://api.ip.sb/geoip/$v66 -k | awk -F "country_code" '{print $2}' | awk -F "region_code" '{print $1}' | sed "s/[,\":}]//g"`
 g6=$(eval echo \$$gj6)
 WARPIPv6Status=$(curl -s6m3 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 case ${WARPIPv6Status} in 
