@@ -124,9 +124,9 @@ c6="sed -i 's/1.1.1.1/2001:4860:4860::8888,8.8.8.8/g' wgcf-profile.conf"
 
 Print_ALL_Status_menu() {
 white " 操作系统名称: $(blue "$op")"
-white " 系统内核版本: $version " 
-white " CPU架构名称 : $bit "
-white " 虚拟架构类型: $vi "
+white " 系统内核版本: $(blue "$version")" 
+white " CPU架构名称 : $(blue "$bit")"
+white " 虚拟架构类型: $(blue "$vi")"
 white "=========================================="
 white " 当前IPV4接管出站流量情况如下"
 blue " ${WARPIPv4Status}"
