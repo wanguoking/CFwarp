@@ -123,7 +123,7 @@ c5="sed -i 's/1.1.1.1/8.8.8.8,2001:4860:4860::8888/g' wgcf-profile.conf"
 c6="sed -i 's/1.1.1.1/2001:4860:4860::8888,8.8.8.8/g' wgcf-profile.conf"
 
 Print_ALL_Status_menu() {
-white " 操作系统名称: "$(blue "op")
+white " 操作系统名称: "$(blue "$op")
 white " 系统内核版本: $version " 
 white " CPU架构名称 : $bit "
 white " 虚拟架构类型: $vi "
