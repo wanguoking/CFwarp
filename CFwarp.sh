@@ -174,7 +174,8 @@ if [[ ${vi} == "kvm" || ${vi} == "xen" || ${vi} == "microsoft" ]]; then
 green "经检测，内核小于5.6版本，安装WARP内核模块模式"
 yellow "内核升级到5.6版本以上，即可安装最高效的WARP内核集成模式"
 sleep 2s
-curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
+vsid=`grep -i version_id /etc/os-release | cut -d \" -f2 | cut -d . -f1`
+curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-$vsid/jdoss-wireguard-epel-$vsid.repo
 yum -y install epel-release wireguard-dkms
 fi
 fi	
