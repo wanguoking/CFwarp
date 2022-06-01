@@ -44,7 +44,7 @@ release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 release="Centos"
 else 
-red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
+red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/wanguoking/CFwarp/issues"
 rm -f CFwarp.sh
 exit 1
 fi
@@ -157,7 +157,7 @@ TUN=$(cat /dev/net/tun 2>&1)
 if [[ ${TUN} == "cat: /dev/net/tun: File descriptor in bad state" ]]; then
 green "检测完毕：已开启TUN，支持安装wireguard-go模式的WARP(+)，继续……"
 else
-red "检测完毕：未开启TUN，不支持安装WARP(+)，请与VPS厂商沟通或后台设置以开启TUN，反馈地址 https://github.com/kkkyg/CFwarp/issues"
+red "检测完毕：未开启TUN，不支持安装WARP(+)，请与VPS厂商沟通或后台设置以开启TUN，反馈地址 https://github.com/wanguoking/CFwarp/issues"
 exit 1
 fi
 fi
@@ -203,12 +203,12 @@ apt -y --no-install-recommends install net-tools iproute2 openresolv dnsutils wi
 fi
 	
 if [[ ${bit} == "x86_64" ]]; then
-wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/wgcf_2.2.9_amd64 -O /usr/local/bin/wgcf && chmod +x /usr/local/bin/wgcf         
+wget -N https://cdn.jsdelivr.net/gh/wanguoking/CFwarp/wgcf_2.2.9_amd64 -O /usr/local/bin/wgcf && chmod +x /usr/local/bin/wgcf         
 elif [[ ${bit} == "aarch64" ]]; then
-wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/wgcf_2.2.9_arm64 -O /usr/local/bin/wgcf && chmod +x /usr/local/bin/wgcf
+wget -N https://cdn.jsdelivr.net/gh/wanguoking/CFwarp/wgcf_2.2.9_arm64 -O /usr/local/bin/wgcf && chmod +x /usr/local/bin/wgcf
 fi
 if [[ ${vi} == "lxc" || ${vi} == "openvz" ]]; then
-wget -N https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/wireguard-go -O /usr/bin/wireguard-go && chmod +x /usr/bin/wireguard-go
+wget -N https://cdn.jsdelivr.net/gh/wanguoking/CFwarp/wireguard-go -O /usr/bin/wireguard-go && chmod +x /usr/bin/wireguard-go
 fi
 
 mkdir -p /etc/wireguard/ >/dev/null 2>&1
@@ -350,12 +350,12 @@ fi
 else
 green "python3已安装"
 fi
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/warp-plus/wp.py
+wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/wanguoking/warp-plus/wp.py
 python3 wp.py
 }
 
 function upcore(){
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/ucore.sh && chmod +x ucore.sh && ./ucore.sh
+wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/wanguoking/CFwarp/ucore.sh && chmod +x ucore.sh && ./ucore.sh
 }
 
 function iptables(){
@@ -443,7 +443,7 @@ char=$(get_char) && bash CFwarp.sh
 }
 
 function up4(){
-wget -N --no-check-certificate https://raw.githubusercontent.com/kkkyg/CFwarp/main/CFwarp.sh && chmod +x CFwarp.sh && ./CFwarp.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/wanguoking/CFwarp/main/CFwarp.sh && chmod +x CFwarp.sh && ./CFwarp.sh
 }
 
 function start_menu(){
@@ -463,7 +463,7 @@ fi
 if [[ -n ${v44} && -n ${v66} ]]; then 
 clear
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-yellow " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃"    
+yellow " 详细说明 https://github.com/wanguoking/CFwarp  YouTube频道：甬哥侃侃侃"    
 yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "    
 white " ==================一、VPS相关调整选择（更新中）=========================================="    
 green "  1. 开启甲骨文VPS系统所有端口 "
@@ -509,7 +509,7 @@ esac
 elif [[ -n ${v66} && -z ${v44} ]]; then
 clear
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-yellow " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
+yellow " 详细说明 https://github.com/wanguoking/CFwarp  YouTube频道：甬哥侃侃侃" 
 yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS系统所有端口 "
@@ -555,7 +555,7 @@ esac
 elif [[ -z ${v66} && -n ${v44} ]]; then
 clear
 red "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-yellow " 详细说明 https://github.com/kkkyg/CFwarp  YouTube频道：甬哥侃侃侃" 
+yellow " 详细说明 https://github.com/wanguoking/CFwarp  YouTube频道：甬哥侃侃侃" 
 yellow " 切记：进入脚本快捷方式 bash CFwarp.sh "
 white " ==================一、VPS相关调整选择（更新中）==========================================" 
 green "  1. 开启甲骨文VPS的系统所有端口 "
@@ -598,7 +598,7 @@ case "$menuNumberInput" in
  0 ) exit 0;;
 esac
 else
-red "无法检测，请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
+red "无法检测，请向作者反馈 https://github.com/wanguoking/CFwarp/issues"
 exit 1
 fi
 }
