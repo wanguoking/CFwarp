@@ -44,10 +44,10 @@ WARP+账户对速度没有什么影响，装B可以！大家回车跳过就行�
 
 最新一键脚本：
 ```
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && chmod +x CFwarp.sh && ./CFwarp.sh
+wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/wanguoking/CFwarp/warp.sh && chmod +x warp.sh && ./warp.sh
 ```
 
-进入脚本快捷方式 ```bash CFwarp.sh```
+进入脚本快捷方式 ```bash warp.sh```
 
 
 ### 相关视频教程及项目
@@ -124,10 +124,10 @@ echo -e "search blue.kundencontroller.de\noptions rotate\nnameserver 2a02:180:6:
 - **：支持X86/ARM架构的纯IPV4、纯IPV6、双栈IPV4+IPV6 VPS脚本**
 
 ```
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh && chmod +x CFwarp.sh && ./CFwarp.sh
+wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/wanguoking/CFwarp/warp.sh && chmod +x warp.sh && ./warp.sh
 ```
 
-进入脚本快捷方式 ```bash CFwarp.sh```
+进入脚本快捷方式 ```bash warp.sh```
 
 - [刷新脚本](https://purge.jsdelivr.net/gh/kkkyg/CFwarp/CFwarp.sh)
 
